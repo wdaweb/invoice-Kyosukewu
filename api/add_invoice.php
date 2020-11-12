@@ -2,7 +2,7 @@
 //撰寫新增消費發票的程式碼
 //將發票的號碼及相關資訊寫入資料庫
 
-include_once("base.php");// once 只要一份
+include_once("../base.php");// once 只要一份
 // foreach($_POST as $key =>$value){
 //     $tmp[]=$key;
 // }
