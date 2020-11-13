@@ -19,5 +19,5 @@ echo $sql;
 $pdo->exec($sql);
 
 echo "新增完成";
-header("location:../index.php");
+header("location:../index.php?do=invoice_list");
 ?>
