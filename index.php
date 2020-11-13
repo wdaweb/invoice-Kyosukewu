@@ -12,8 +12,8 @@
     </style>
 </head>
 <body>
-    <div class="h3 text-center">統一發票紀錄與對獎</div>
-    <div class="col-8 d-flex justify-content-between p-3 mx-auto border">
+    <div class="h3 text-center my-3">統一發票紀錄與對獎</div>
+    <div class="col-lg-8 col-md-12 d-flex justify-content-between p-3 mx-auto border">
         <?php
         $month = [
             1 => "1,2月",
@@ -41,7 +41,7 @@
             <a href="index.php">回首頁</a>
         </div>
     </div>
-    <div class="col-8 d-flex p-3 mx-auto border">
+    <div class="col-lg-8 col-md-12 d-flex p-3 mx-auto border">
         <?php
         if (isset($_GET['do'])) {
             $file = $_GET['do'] . ".php";
