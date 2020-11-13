@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -12,7 +11,6 @@
 
     </style>
 </head>
-
 <body>
     <div class="h3 text-center">統一發票紀錄與對獎</div>
     <div class="col-8 d-flex justify-content-between p-3 mx-auto border">
@@ -45,8 +43,6 @@
     </div>
     <div class="col-8 d-flex p-3 mx-auto border">
         <?php
-
-
         if (isset($_GET['do'])) {
             $file = $_GET['do'] . ".php";
             include $file;
