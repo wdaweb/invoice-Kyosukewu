@@ -43,7 +43,7 @@
     </div>
     <div class="col-lg-8 col-md-12 d-flex p-3 mx-auto border">
         <?php
-        if (isset($_GET['do'])) {
+        if (isset($_GET['do'])){
             $file = $_GET['do'] . ".php";
             include $file;
         } else {
