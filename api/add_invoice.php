@@ -9,9 +9,9 @@ include_once("../base.php");// once 只要一份
 // foreach($_POST as $key =>$value){
 //     $tmp2[]=$value;
 // }
-echo "<pre>";
-print_r(array_keys($_POST));
-echo "</pre>";
+// echo "<pre>";
+// print_r(array_keys($_POST));
+// echo "</pre>";
 
 
 $sql="insert into invoices (`".implode("`,`",array_keys($_POST))."`) values('".implode("','",$_POST)."')";
