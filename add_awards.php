@@ -18,7 +18,7 @@
         <tr>
             <th id="specialPrize" rowspan="2">特別獎</th>
             <td headers="specialPrize" class="number">
-                <input type="number" name="special_prize" min="00000001" max="99999999">
+                <input type="number" name="special_prize" min="00000000" max="99999999">
             </td>
         </tr>
         <tr>
@@ -27,7 +27,7 @@
         <tr>
             <th id="grandPrize" rowspan="2">特獎</th>
             <td headers="grandPrize" class="number">
-            <input type="number" name="grand_prize" min="00000001" max="99999999">
+            <input type="number" name="grand_prize" min="00000000" max="99999999">
             </td>
         </tr>
         <tr>
@@ -36,9 +36,9 @@
         <tr>
             <th id="firstPrize" rowspan="2">頭獎</th>
             <td headers="firstPrize" class="number">
-            <input type="number" name="first_prize[]" min="00000001" max="99999999">
-            <input type="number" name="first_prize[]" min="00000001" max="99999999">
-            <input type="number" name="first_prize[]" min="00000001" max="99999999">
+            <input type="number" name="first_prize[]" min="00000000" max="99999999">
+            <input type="number" name="first_prize[]" min="00000000" max="99999999">
+            <input type="number" name="first_prize[]" min="00000000" max="99999999">
             </td>
         </tr>
         <tr>
@@ -67,9 +67,9 @@
         <tr>
             <th id="addSixPrize">增開六獎</th>
             <td headers="addSixPrize" class="number">
-            <input type="number" name="add_prize[]" min="001" max="999">
-            <input type="number" name="add_prize[]" min="001" max="999">
-            <input type="number" name="add_prize[]" min="001" max="999">
+            <input type="number" name="add_prize[]" min="000" max="999">
+            <input type="number" name="add_prize[]" min="000" max="999">
+            <input type="number" name="add_prize[]" min="000" max="999">
             </td>
         </tr>
     </tbody>
