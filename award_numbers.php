@@ -32,12 +32,12 @@ foreach ($awards as $aw) {
 ?>
 <div class="row">
     <div class="d-flex justify-content-around mb-3">
-        <a href="">1,2月</a>
-        <a href="">3,4月</a>
-        <a href="">5,6月</a>
-        <a href="">7,8月</a>
-        <a href="">9,10月</a>
-        <a href="">11,12月</a>
+        <a href="?do=award_numbers&pd=2020-1">1,2月</a>
+        <a href="?do=award_numbers&pd=2020-2">3,4月</a>
+        <a href="?do=award_numbers&pd=2020-3">5,6月</a>
+        <a href="?do=award_numbers&pd=2020-4">7,8月</a>
+        <a href="?do=award_numbers&pd=2020-5">9,10月</a>
+        <a href="?do=award_numbers&pd=2020-6">11,12月</a>
     </div>
 
     <table class="table table-bordered table-sm" summary="統一發票中獎號碼單">
@@ -122,4 +122,6 @@ foreach ($awards as $aw) {
             </tr>
         </tbody>
     </table>
+    <a class="mx-auto" href="?do=all_awards&year=<?=$year?>&period=<?=$period?>">
+    <button class="btn btn-success">對獎</button></a>
 </div>
