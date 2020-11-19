@@ -1,15 +1,3 @@
-<?php
-
-function errFeedBack($feild){
-    if(!empty($_SESSION['err'][$feild])){
-        foreach(($_SESSION['err'][$feild]) as $err){
-            echo "<div style='font-size:12px; color:red;>'";
-            echo $err ;
-            echo "</div>";
-        }
-    }
-}
-?>
 
 <form class="" action="api/add_invoice.php" method="post">
     <div>日期：<input type="date" name="date"></div>

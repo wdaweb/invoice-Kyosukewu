@@ -55,3 +55,4 @@
 </body>
 
 </html>
+<?php $_SESSION['err']=[];?>
