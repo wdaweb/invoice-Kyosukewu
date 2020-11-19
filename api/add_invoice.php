@@ -13,10 +13,15 @@ $_SESSION['err']=[];
 // echo "<pre>";
 // print_r(array_keys($_POST));
 // echo "</pre>";
+echo "<pre>";
+print_r(array_keys($_POST));
+echo "</pre>";
 accept('number','發票號碼的欄位必填');
 
 $sql="insert into invoices (`".implode("`,`",array_keys($_POST))."`) values('".implode("','",$_POST)."')";
 echo $sql;
+
+
 echo "新增完成";
 
 if(empty($_SESSION['err'])){
@@ -25,4 +30,5 @@ if(empty($_SESSION['err'])){
 }else{
     header("location:../index.php");
 }
+
 ?>
