@@ -17,7 +17,7 @@ echo $period_str[$_GET['period']]."單期發票對獎，";
 //撈出該期發票
 $sql="select * from `invoices` where left(date,4)='{$_GET['year']}' && period='{$_GET['period']}' Order by date";
 $invoices=$pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
-echo "總共有".count($invoices)."筆資料<br>";
+echo "總共有".count($invoices)."張發票<br>";
 // echo "<pre>";
 // print_r($invoices);
 // echo "</pre>";
@@ -39,8 +39,6 @@ foreach($invoices as $inv){
     
     $number=$inv['number'];
     $date=$inv['date'];
-    $year=explode('-',$date)[0];
-    $period=ceil(explode('-',$date)[1]/2);
     foreach($award_numbers as $award){
         switch($award['type']){
             case 1: //特別獎
