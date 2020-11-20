@@ -40,5 +40,12 @@ function errFeedBack($field){
     }
 }
 
+function find($table,$id){
+    global $pdo;
+    $sql="select * from $table where id='$id'";
+    $row=$pdo->query($sql)->fetch();
+    
+    return $row;
+}
 
 ?>

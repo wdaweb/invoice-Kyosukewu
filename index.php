@@ -11,8 +11,17 @@
     <title>統一發票紀錄及對獎系統</title>
     <style type="text/css">
         body {
+            width: 100vw;
+            height: 100vh;
             background: url(images/bg.jpg);
             background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+
+        .container {
+            position: relative;
         }
 
         .path1 {
@@ -20,6 +29,7 @@
             position: absolute;
         }
 
+        .p0,
         .p1,
         .p2,
         .p3,
@@ -31,16 +41,19 @@
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
             box-shadow: 5px 5px 10px #333;
+            transform: matrix(1, 0, 0, 1, 0, 0);
+            transition: transform .5s 0s ease;
         }
+
         .p1:hover,
         .p2:hover,
         .p3:hover,
         .p4:hover {
-            transform: matrix( 0.8, -0.25, 0, 1, 0, 0);
+            transform: matrix(0.8, -0.25, 0, 1, 0, 0);
             /* transform: scale(1.1,1.1); */
         }
 
-        .path1 a {
+        .path1 a,.p0 {
             padding: 10px;
             color: #FFF;
             text-decoration: none;
@@ -49,37 +62,38 @@
 </head>
 
 <body>
-    <div class="h3 text-center my-3">統一發票紀錄與對獎</div>
-    <div class="col-lg-8 col-md-12 d-flex justify-content-between p-3 mx-auto border">
-        <?php
-        $month = [
-            1 => "1,2月",
-            2 => "3,4月",
-            3 => "5,6月",
-            4 => "7,8月",
-            5 => "9,10月",
-            6 => "11,12月",
-        ];
-
-        $m = ceil(date("m") / 2);
-
-        ?>
-        <div class="text-center"><?= $month[$m]; ?></div>
-        <div class="path1">
-            <div class="p1 bg-danger mb-1"><a href="?do=invoice_list">當期發票</a></div>
-            <div class="p2 bg-success mb-1"><a href="?do=award_numbers">對獎</a></div>
-            <div class="p3 bg-warning mb-1"><a href="?do=add_awards">輸入獎號</a></div>
-            <div class="p4 bg-dark mb-1"><a href="index.php">闔上</a></div>
-        </div>
-        <div class="col-lg-8 col-md-12 d-flex p-3 mx-auto border">
+    <div class="container">
+        <div class="">統一發票紀錄與對獎</div>
+        <div class="">
             <?php
-            if (isset($_GET['do'])) {
-                $file = $_GET['do'] . ".php";
-                include $file;
-            } else {
-                include "main.php";
-            }
+            $month = [
+                1 => "1,2月",
+                2 => "3,4月",
+                3 => "5,6月",
+                4 => "7,8月",
+                5 => "9,10月",
+                6 => "11,12月",
+            ];
+            $m = ceil(date("m") / 2);
             ?>
+
+            <div class="path1">
+                <div class="p0 text-secondary bg-light mb-1"><?= $month[$m]; ?></div>
+                <div class="p1 bg-danger mb-1"><a href="?do=invoice_list">當期發票</a></div>
+                <div class="p2 bg-success mb-1"><a href="?do=award_numbers">對獎</a></div>
+                <div class="p3 bg-warning mb-1"><a href="?do=add_awards">輸入獎號</a></div>
+                <div class="p4 bg-dark mb-1"><a href="index.php">闔上</a></div>
+            </div>
+            <div class="">
+                <?php
+                if (isset($_GET['do'])) {
+                    $file = $_GET['do'] . ".php";
+                    include $file;
+                } else {
+                    include "main.php";
+                }
+                ?>
+            </div>
         </div>
 </body>
 
