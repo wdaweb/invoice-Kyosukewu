@@ -1,5 +1,5 @@
 
-<form class="" action="api/add_invoice.php" method="post">
+<form class="col-12" action="api/add_invoice.php" method="post">
     <div>日期：<input type="date" name="date"></div>
     期別：<select name="period">
         <option value="1">1,2月</option>

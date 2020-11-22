@@ -8,6 +8,7 @@ session_start();
 
 $awardStr=['頭','貳','參','肆','伍','陸',];
 
+//欄位檢查
 function accept($field,$meg='此欄位不得為空'){
     if(empty($_POST[$field])){
         $_SESSION['err'][$field]['empty']=$meg;
@@ -40,12 +41,30 @@ function errFeedBack($field){
     }
 }
 
-function find($table,$id){
+function all($table,...$arg){
     global $pdo;
-    $sql="select * from $table where id='$id'";
-    $row=$pdo->query($sql)->fetch();
-    
-    return $row;
+    // echo gettype($arg);
+    $sql="select * from $table";
+    if(isset($arg[0])){
+        if(is_array($arg[0])){
+        //製作會在where後的字串(陣列格式)
+            if(!empty($arg[0])){
+                foreach($arg[0] as $key => $value){
+                    $tmp[]=sprintf("`%s`='%s'",$key,$value);
+                }
+                $sql=$sql." where ".implode(' && ',$tmp);
+            }
+        }else{
+            //製作非陣列的語句接$sql後
+                $sql=$sql.$arg[0];
+        }
+    }
+    if(isset($arg[1])){
+        //製作接在最後的句子字串
+        $sql=$sql.$arg[1];
+}
+    echo $sql."<br>";
+    return $pdo->query($sql)->fetchALL();
 }
 
 ?>
