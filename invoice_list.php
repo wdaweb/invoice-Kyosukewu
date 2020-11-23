@@ -21,7 +21,7 @@ $rows=$pdo->query($sql)->fetchall();
         <a href="">9,10月</a>
         <a href="">11,12月</a>
     </div>
-<table class="table text-center">
+<table class="table text-center col-12">
     <tr class="text-center">
         <td>發票號碼</td>
         <td>消費日期</td>
@@ -37,11 +37,11 @@ $rows=$pdo->query($sql)->fetchall();
         <td class="text-center"><?=$row['payment']?></td>
         <td>
             <a href="?do=edit_invoice&id=<?=$row['id'];?>">
-            <button class="btn btn-sm btn-light">編輯</button></a>
+            <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-warning"><p class="far fa-edit"></p></button></a>
             <a href="?do=del_invoice&id=<?=$row['id'];?>">
-            <button  class="btn btn-sm btn-danger">刪除</button></a>
+            <button type="button" data-toggle="tooltip" data-placement="top" title="刪除" class="btn btn-sm btn-danger"><p class="fas fa-trash-alt"></p></button></a>
             <a href="?do=award&id=<?=$row['id'];?>">
-            <button  class="btn btn-sm btn-success">對獎</button></a>
+            <button type="button" data-toggle="tooltip" data-placement="top" title="對獎" class="btn btn-sm btn-success"><p class="fas fa-medal"></p></button></a>
         </td>
     </tr>
     <?php

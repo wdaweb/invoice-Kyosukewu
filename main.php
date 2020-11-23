@@ -1,23 +1,39 @@
-
-<form class="col-12" action="api/add_invoice.php" method="post">
-    <div>日期：<input type="date" name="date"></div>
-    期別：<select name="period">
-        <option value="1">1,2月</option>
-        <option value="2">3,4月</option>
-        <option value="3">5,6月</option>
-        <option value="4">7,8月</option>
-        <option value="5">9,10月</option>
-        <option value="6">11,12月</option>
-    </select>
-    <div>發票號碼：
-        <input type="text" name="code" style="width:50px"> -
-        <input type="number" name="number" style="width:150px">
-        <?php errFeedBack('number');?>
-    </div>
-    <div>
-        發票金額：<input type="number" name="payment">
-    </div>
-    <div class="text-center">
-        <input type="submit" value="送出">
-    </div>
+<table class="col-12 col-md-8  mx-auto">
+    <thead>
+        <tr>
+            <td colspan="2" class="h3 text-center pb-3 border-bottom">統一發票紀錄與對獎</td>
+        </tr>
+    </thead>
+    <tbody>
+        <form class="" action="api/add_invoice.php" method="post">
+            <tr>
+                <td class="ll pt-3 pr-3 w-25">日期</td>
+                <td class="pt-3"><input class="w-100" type="date" name="date"></td>
+            </tr>
+            <tr>
+                <td class="ll pt-3 pr-3">期別</td>
+                <td class="pt-3"><select name="period" class="w-100">
+                        <option value="1">1,2月</option>
+                        <option value="2">3,4月</option>
+                        <option value="3">5,6月</option>
+                        <option value="4">7,8月</option>
+                        <option value="5">9,10月</option>
+                        <option value="6">11,12月</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td class="ll pt-3 pr-3">發票號碼</td>
+                <td class="pt-3"><input type="text" name="code" style="width:20%;"> - 
+                    <input type="number" name="number" style="width:75%;">
+                    <?php errFeedBack('number'); ?></td>
+            </tr>
+            <tr>
+                <td class="ll pt-3 pr-3">發票金額</td>
+                <td class="pt-3"><input type="number" name="payment" class="w-100"></td>
+            </tr>
+    </tbody>
+</table>
+<div class="text-center mt-4">
+    <input class="btn btn-dark" type="submit" value="送出">
+</div>
 </form>
