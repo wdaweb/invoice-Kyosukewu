@@ -2,7 +2,21 @@
 include_once("base.php");
 
 $period=ceil(date('m')/2);
-$sql="select * from `invoices` where period='$period'  order by date desc";
+
+//資料分頁
+$pageSize=13; //每頁幾條紀錄
+$rowCount=$pdo->query("select count(period) from `invoices` where period='$period'")->fetch();//共幾條紀錄
+
+$pageNow=1;//顯示第幾頁
+$pageCount=ceil($rowCount[0]/$pageSize);//共多少頁
+if(!empty($_GET['pageNow'])){
+    $pageNow=$_GET['pageNow'];
+}
+
+$pageCount=ceil($rowCount[0]/$pageSize);
+$pageStart=($pageNow-1)*$pageSize;
+
+$sql="select * from `invoices` where period='$period' Order by date desc limit $pageStart,$pageSize";
 // $sql="select * from `invoices` order by date desc";
 
 $rows=$pdo->query($sql)->fetchall();
@@ -48,4 +62,11 @@ $rows=$pdo->query($sql)->fetchall();
     }
     ?>
 </table>
+<div class="page d-flex justify-content-evenly d-flex align-items-end">
+<?php
+for($i=1;$i<=$pageCount;$i++){
+echo "<a href='?pageNow=$i'>$i</a> ";//[列印出頁碼的超連結]
+}
+?>
+</div>
 </div>

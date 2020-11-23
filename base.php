@@ -71,6 +71,8 @@ function all($table, ...$arg)
     return $pdo->query($sql)->fetchALL();
 }
 
+//分頁
+
 ?>
 <script>
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))

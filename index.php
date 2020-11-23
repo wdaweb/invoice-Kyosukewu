@@ -85,7 +85,7 @@
       width: 100%;
       height: 90%;
       background: url(https://i.postimg.cc/7h6c8r7w/bgbook1.png) no-repeat center center;
-      background-size: cover;
+      background-size: 100% 100%;
       background-position: 50% 50%;
       position: relative;
       border-radius: 20px;
@@ -161,31 +161,6 @@
         height: 17vh;
         right: 80%;
       }
-
-      .container {
-        display: flex;
-        align-items: center;
-        height: 100vh;
-      }
-
-      .book {
-        width: 100%;
-        height: 90%;
-        background: url(https://i.postimg.cc/7h6c8r7w/bgbook1.png) no-repeat center center;
-        background-size: 100% 100%;
-        background-position: 50% 50%;
-        position: relative;
-        border-radius: 20px;
-      }
-
-      .content {
-        display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-        height: 96%;
-        margin: 3% 0;
-      }
-
       .content-l {
         background: url(https://i.postimg.cc/52mpz3rC/left-bg.jpg);
         background-size: cover;
@@ -233,31 +208,6 @@
         height: 17vh;
         right: 80%;
       }
-
-      .container {
-        display: flex;
-        align-items: center;
-        height: 100vh;
-      }
-
-      .book {
-        width: 100%;
-        height: 90%;
-        background: url(https://i.postimg.cc/7h6c8r7w/bgbook1.png) no-repeat center center;
-        background-size: 100% 100%;
-        background-position: 50% 50%;
-        position: relative;
-        border-radius: 20px;
-      }
-
-      .content {
-        display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-        height: 96%;
-        margin: 2% 0;
-      }
-
       .content-l {
         background: url(https://i.postimg.cc/52mpz3rC/left-bg.jpg);
         background-size: cover;
@@ -495,7 +445,7 @@
       }
 
       .bg4 {
-        bottom: -10;
+        bottom: -5%;
         height: 17vh;
         right: 70%;
       }
@@ -559,9 +509,10 @@
       $m = ceil(date("m") / 2);
       ?>
       <div class="path1">
-        <div class="p0 text-secondary bg-light mb-1"><?= $month[$m]; ?></div>
-        <div class="p1 bg-danger mb-1"><a href="?do=invoice_list">當期發票</a></div>
-        <div class="p2 bg-success mb-1"><a href="?do=award_numbers">對獎</a></div>
+        <div class="p0 text-light bg-secondary mb-1"><?= $month[$m]; ?></div>
+        <div class="p1 bg-success mb-1"><a href="?do=invoice_list">當期發票</a></div>
+        <div class="p2 bg-danger mb-1"><a href="?do=award_numbers">全期對獎</a></div>
+        <div class="p1 bg-primary mb-1"><a href="?in=main">輸入發票</a></div>
         <div class="p3 bg-warning mb-1"><a href="?in=add_awards">輸入獎號</a></div>
         <div class="p4 bg-dark mb-1"><a href="index.php">闔上</a></div>
       </div>
@@ -578,6 +529,7 @@
             }
             ?>
           </div>
+
         </div>
         <div class="content-r col-12 col-lg-6">
           <div class="card-img-overlay">
