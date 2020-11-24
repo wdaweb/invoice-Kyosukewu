@@ -176,6 +176,24 @@
   .path a {
     text-decoration: none;
   }
+
+
+  @media screen and (max-width: 576px) {
+    .table-container {
+      height: 21rem;
+    }
+
+    .table {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .table tbody {
+      overflow-y: scroll;
+    }
+  }
+
   @media screen and (min-width: 576px) {
 
     .bg1,
@@ -221,6 +239,20 @@
       background-size: cover;
       position: relative;
       border-radius: 0 0 15px 15px;
+    }
+
+    .table-container {
+      height: 21rem;
+    }
+
+    .table {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .table tbody {
+      overflow-y: scroll;
     }
   }
 
@@ -269,6 +301,20 @@
       background-size: cover;
       position: relative;
       border-radius: 0 0 15px 15px;
+    }
+
+    .table-container {
+      height: 21rem;
+    }
+
+    .table {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .table tbody {
+      overflow-y: scroll;
     }
   }
 
@@ -373,6 +419,17 @@
       background-size: 100% 100%;
       border-radius: 0 15px 15px 0;
     }
+    .table-container {
+      height: 80%;
+    }
+    .table {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .table tbody {
+      overflow: auto;
+    }
   }
 
   @media screen and (min-width: 1200px) {
@@ -476,6 +533,17 @@
       background: url(https://i.postimg.cc/8CP4mv8n/right-bg.jpg);
       background-size: 100% 100%;
       border-radius: 0 15px 15px 0;
+    }
+    .table-container {
+      height: 50%;
+    }
+    .table {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .table tbody {
+      overflow: auto;
     }
   }
 
@@ -587,6 +655,12 @@
       background-size: 100% 100%;
       border-radius: 0 15px 15px 0;
     }
+    .table-container {
+      height: 50%;
+    }
+    .table tbody {
+      overflow: auto;
+    }
   }
 </style>
 
@@ -609,24 +683,24 @@
         6 => "11-12月",
       ];
       // $m = ceil(date("m") / 2);
-      if(empty($_GET['p'])){
+      if (empty($_GET['p'])) {
         $period = ceil(date("m") / 2);
-      }else{
+      } else {
         $period = $_GET['p'];
       }
-      
-      $leftPage="main";
-      $rightPage="invoice_list";
-      
+
+      $leftPage = "main";
+      $rightPage = "invoice_list";
+
       ?>
       <div class="path1">
         <div class="p0 text-light bg-info mb-1"><?= $month[$period]; ?></div>
-        <div class="p1 bg-success mb-1"><a href="?in=<?=$leftPage?>&do=invoice_list">當期發票</a></div>
+        <div class="p1 bg-success mb-1"><a href="?in=<?= $leftPage ?>&do=invoice_list">當期發票</a></div>
         <div class="p2 bg-danger mb-1"><a href="?in=add_awards&do=award_numbers">全期對獎</a></div>
         <div class="p3 bg-dark mb-1"><a href="index.php">闔上</a></div>
       </div>
       <div class="path2">
-        <div class="p4 bg-primary mb-1"><a href="?in=main&do=<?=$rightPage?>">輸入發票</a></div>
+        <div class="p4 bg-primary mb-1"><a href="?in=main&do=<?= $rightPage ?>">輸入發票</a></div>
         <div class="p5 bg-warning mb-1"><a href="?in=add_awards&do=award_numbers">輸入獎號</a></div>
       </div>
       <div class="content">

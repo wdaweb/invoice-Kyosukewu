@@ -29,6 +29,12 @@ foreach ($awards as $aw) {
     }
 }
 
+if(empty($awards)){
+    $aw ="disabled";
+}else{
+    $aw ="";
+}
+
 ?>
 <div class="row">
     <div class="path mb-2">
@@ -41,8 +47,9 @@ foreach ($awards as $aw) {
             <a href="?do=award_numbers&pd=2020-6"><button class="btn btn-sm btn-outline-secondary" type="button">11-12月</button></a>
         </nav>
     </div>
+    <div class="table-container">
     <table class="table table-sm col-12">
-        <tbody style="overflow-y: auto;">
+        <tbody>
             <tr>
                 <td class="col-2  col-md-3 col-lg-2  col-md-3 col-lg-2 col-md-3 col-lg-2 text-center">年月份</td>
                 <td class="col-10 pl-3">
@@ -70,8 +77,8 @@ foreach ($awards as $aw) {
                 </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  col-md-3 col-lg-2 text-center" rowspan="2">特獎</td>
-                <td> 同期統一發票收執聯<span class="text-danger">8位數號碼</span>與特獎號碼相同者獎金200萬元 </td>
+                <td class="col-2  col-md-3 col-lg-2  text-center" rowspan="2">特獎</td>
+                <td class="pl-3"> 同期統一發票收執聯<span class="text-danger">8位數號碼</span>與特獎號碼相同者獎金200萬元 </td>
             </tr>
             <tr>
                 <td class="pl-3">
@@ -79,40 +86,40 @@ foreach ($awards as $aw) {
                 </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  col-md-3 col-lg-2 text-center" rowspan="2">頭獎</td>
+                <td class="col-2  col-md-3 col-lg-2  text-center" rowspan="2">頭獎</td>
                 <td class="pl-3"> 同期統一發票收執聯<span class="text-danger">8位數號碼</span>與頭獎號碼相同者獎金20萬元 </td>
             </tr>
             <tr>
                 <td class="pl-3">
                     <?php
                     foreach ($first as $f) {
-                        echo $f . "<br>";
+                        echo $f . "";
                     }
                     ?>
                 </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  col-md-3 col-lg-2 text-center">二獎</td>
-                <td class="pl-3"> 同期統一發票收執聯末7 位數號碼與頭獎中獎號碼<span class="text-danger">末7位</span>相同者<br>各得獎金4萬元 </td>
+                <td class="col-2  col-md-3 col-lg-2  text-center">二獎</td>
+                <td class="pl-3"> 同期統一發票收執聯末7 位數號碼與頭獎中獎號碼<span class="text-danger">末7位</span>相同者各得獎金4萬元 </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  col-md-3 col-lg-2 text-center">三獎</td>
-                <td class="pl-3"> 同期統一發票收執聯末6 位數號碼與頭獎中獎號碼<span class="text-danger">末6位</span>相同者<br>各得獎金1萬元 </td>
+                <td class="col-2  col-md-3 col-lg-2  text-center">三獎</td>
+                <td class="pl-3"> 同期統一發票收執聯末6 位數號碼與頭獎中獎號碼<span class="text-danger">末6位</span>相同者各得獎金1萬元 </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  col-md-3 col-lg-2 text-center">四獎</td>
-                <td class="pl-3"> 同期統一發票收執聯末5 位數號碼與頭獎中獎號碼<span class="text-danger">末5位</span>相同者<br>各得獎金4千元 </td>
+                <td class="col-2  col-md-3 col-lg-2  text-center">四獎</td>
+                <td class="pl-3"> 同期統一發票收執聯末5 位數號碼與頭獎中獎號碼<span class="text-danger">末5位</span>相同者各得獎金4千元 </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  col-md-3 col-lg-2 text-center">五獎</td>
-                <td class="pl-3"> 同期統一發票收執聯末4 位數號碼與頭獎中獎號碼<span class="text-danger">末4位</span>相同者<br>各得獎金1千元 </td>
+                <td class="col-2  col-md-3 col-lg-2  text-center">五獎</td>
+                <td class="pl-3"> 同期統一發票收執聯末4 位數號碼與頭獎中獎號碼<span class="text-danger">末4位</span>相同者各得獎金1千元 </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  col-md-3 col-lg-2 text-center">六獎</td>
-                <td class="pl-3"> 同期統一發票收執聯末3 位數號碼與頭獎中獎號碼<span class="text-danger">末3位</span>相同者<br>各得獎金2百元 </td>
+                <td class="col-2  col-md-3 col-lg-2  text-center">六獎</td>
+                <td class="pl-3"> 同期統一發票收執聯末3 位數號碼與頭獎中獎號碼<span class="text-danger">末3位</span>相同者各得獎金2百元 </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  col-md-3 col-lg-2 text-center">增開六獎</td>
+                <td class="col-2  col-lg-3  text-center">增開六獎</td>
                 <td class="pl-3">
                     <?php
                     foreach ($six as $s) {
@@ -123,6 +130,7 @@ foreach ($awards as $aw) {
             </tr>
         </tbody>
     </table>
+    </div>
     <div class="aw text-center">
         <a href="?do=all_awards&year=<?= $year ?>&period=<?= $period ?>">
             <button class="btn btn-outline-success">對獎</button></a>
