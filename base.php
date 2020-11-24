@@ -8,6 +8,8 @@ session_start();
 
 $awardStr = ['頭', '貳', '參', '肆', '伍', '陸',];
 
+
+
 //欄位檢查
 function accept($field, $meg = '此欄位不得為空')
 {
@@ -31,7 +33,7 @@ function email($field, $meg = 'email格式錯誤')
         $_SESSION['err'][$field]['email'] = $meg;
     }
 }
-
+//錯誤回報
 function errFeedBack($field)
 {
     if (!empty($_SESSION['err'][$field])) {
@@ -74,9 +76,3 @@ function all($table, ...$arg)
 //分頁
 
 ?>
-<script>
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-</script>

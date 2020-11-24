@@ -1,11 +1,11 @@
+<form class="" action="api/add_invoice.php" method="post">
 <table class="col-12 col-md-8  mx-auto">
     <thead>
         <tr>
-            <td colspan="2" class="h3 text-center pb-3 border-bottom">統一發票紀錄與對獎</td>
+            <td colspan="2" class="h3 text-center pb-3 border-bottom">統一發票紀錄</td>
         </tr>
     </thead>
     <tbody>
-        <form class="" action="api/add_invoice.php" method="post">
             <tr>
                 <td class="ll pt-3 pr-3 w-25">日期</td>
                 <td class="pt-3"><input class="w-100" type="date" name="date"></td>
@@ -23,13 +23,14 @@
             </tr>
             <tr>
                 <td class="ll pt-3 pr-3">發票號碼</td>
-                <td class="pt-3"><input type="text" name="code" style="width:20%;"> - 
-                    <input type="number" name="number" style="width:75%;">
-                    <?php errFeedBack('number'); ?></td>
+                <td class="pt-3"><input type="text" name="code" style="width:15%;text-transform:uppercase;" maxlength="2"> - 
+                    <input type="number" name="number" style="width:70%;">
+                    <?php errFeedBack('code'); ?><?php errFeedBack('number'); ?></td>
             </tr>
             <tr>
                 <td class="ll pt-3 pr-3">發票金額</td>
-                <td class="pt-3"><input type="number" name="payment" class="w-100"></td>
+                <td class="pt-3"><input type="number" name="payment" class="w-100"><?php errFeedBack('payment'); ?></td>
+                
             </tr>
     </tbody>
 </table>
