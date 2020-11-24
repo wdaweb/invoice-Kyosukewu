@@ -143,7 +143,7 @@
   }
 
   .inv {
-    height: 90%;
+    height: 85%;
     overflow: auto;
   }
 
@@ -152,7 +152,7 @@
   }
 
   .t1 {
-    width: 30%;
+    width: 25%;
   }
 
   .t2,
@@ -161,22 +161,21 @@
   }
 
   .t3 {
-    width: 10%;
+    width: 15%;
   }
 
   .path,
   .page {
-    height: 5%;
+    height: 2.5rem;
   }
 
   .tit {
-    height: 1rem;
+    height: 1.5rem;
   }
 
   .path a {
     text-decoration: none;
   }
-
   @media screen and (min-width: 576px) {
 
     .bg1,
@@ -621,7 +620,7 @@
       
       ?>
       <div class="path1">
-        <div class="p0 text-light bg-secondary mb-1"><?= $month[$period]; ?></div>
+        <div class="p0 text-light bg-info mb-1"><?= $month[$period]; ?></div>
         <div class="p1 bg-success mb-1"><a href="?in=<?=$leftPage?>&do=invoice_list">當期發票</a></div>
         <div class="p2 bg-danger mb-1"><a href="?in=add_awards&do=award_numbers">全期對獎</a></div>
         <div class="p3 bg-dark mb-1"><a href="index.php">闔上</a></div>

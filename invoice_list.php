@@ -1,6 +1,6 @@
 <?php
 //資料分頁
-$pageSize = 15; //每頁幾條紀錄
+$pageSize = 16; //每頁幾條紀錄
 $rowCount = $pdo->query("select count(period) from `invoices` where period='$period'")->fetch(); //共幾條紀錄
 
 $pageNow = 1; //顯示第幾頁
@@ -20,34 +20,32 @@ $rows = $pdo->query($sql)->fetchall();
 // }
 ?>
 <div class="rightPage h-100 d-flex flex-column justify-content-between">
-    <div class="path d-flex justify-content-evenly">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb w-100">
-                <li class="breadcrumb-item"><a href="?p=1">1-2月</a></li>
-                <li class="breadcrumb-item"><a href="?p=2">3-4月</a></li>
-                <li class="breadcrumb-item"><a href="?p=3">5-6月</a></li>
-                <li class="breadcrumb-item"><a href="?p=4">7-8月</a></li>
-                <li class="breadcrumb-item"><a href="?p=5">9-10月</a></li>
-                <li class="breadcrumb-item"><a href="?p=6">11-12月</a></li>
-            </ol>
+    <div class="path mb-2">
+        <nav class="navbar navbar-light justify-content-evenly">
+            <a href="?p=1"><button class="btn btn-sm btn-outline-secondary" type="button">1-2月</button></a>
+            <a href="?p=2"><button class="btn btn-sm btn-outline-secondary" type="button">3-4月</button></a>
+            <a href="?p=3"><button class="btn btn-sm btn-outline-secondary" type="button">5-6月</button></a>
+            <a href="?p=4"><button class="btn btn-sm btn-outline-secondary" type="button">7-8月</button></a>
+            <a href="?p=5"><button class="btn btn-sm btn-outline-secondary" type="button">9-10月</button></a>
+            <a href="?p=6"><button class="btn btn-sm btn-outline-secondary" type="button">11-12月</button></a>
         </nav>
     </div>
 
-    <div class="tit d-flex w-100 my-3">
-        <div class="t1 text-center">發票號碼</div>
-        <div class="t2 text-center">消費日期</div>
-        <div class="t3 text-center">金額</div>
-        <div class="t4 text-center">操作</div>
-    </div>
-
+    
     <div class="inv">
+        <div class="tit d-flex w-100 mb-2 border-top">
+            <div class="t1 text-center">發票號碼</div>
+            <div class="t2 text-center">消費日期</div>
+            <div class="t3 text-center">金額</div>
+            <div class="t4 text-center">操作</div>
+        </div>
         <div class="invoices w-100">
             <?php
             foreach ($rows as $row) {
             ?>
                 <div class="invoice d-flex flex-wrap">
                     <div class="t1 text-center"><?= $row['code'] . "-" . $row['number'] ?></div>
-                    <div class="t2 text-center"><?= $row['date'] ?></div>
+                    <div class="t2 text-center  text-secondary"><?= $row['date'] ?></div>
                     <div class="t3 text-center"><?= $row['payment'] ?></div>
                     <div class="t4 text-center">
                         <a href="?do=edit_invoice&id=<?= $row['id']; ?>">
@@ -70,33 +68,51 @@ $rows = $pdo->query($sql)->fetchall();
             ?>
         </div>
     </div>
-    <!-- <div class="page pagination justify-content-center align-items-end">
+    <?php
+    $prePage = $pageNow - 1;
+
+    if ($pageNow < $pageCount) {
+        $nextPage = $pageNow + 1;
+    } else {
+        $nextPage = $pageCount;
+    }
+
+
+
+    ?>
+    <div class="page pagination justify-content-center align-items-end">
         <li class="page-item">
             <a class="page-link" href="?pageNow=<?= $pageNow = 1; ?>&p=<?= $period; ?>" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
+                <span aria-hidden="true" class="text-dark fas fa-angle-double-left"></span>
             </a>
         </li>
-        <?php
-        for ($i = 1; $i <= $pageCount; $i++) {
-            echo "<li class='page-item'>";
-            echo "<a href='?pageNow=$i&p=$period' class='page-link'>$i</a> "; //[列印出頁碼的超連結]
-        }
-        ?>
+        <li class="page-item">
+            <a class="page-link" href="?pageNow=<?= $prePage; ?>&p=<?= $period; ?>" aria-label="Previous">
+                <span aria-hidden="true" class="text-dark fas fas fa-angle-left"></span>
+            </a>
+        </li>
+        <li class="page-item">
+            <form action="index.php" method="get">
+                <input type="hidden" name="p" value="<?= $period ?>">
+                <select name="pageNow" onchange="submit();" class="form-select text-dark">
+                    <?php
+                    for ($i = 1; $i <= $pageCount; $i++) {
+                        echo "<option value='$i'>Page-" . $i . "</option>";
+                    }
+                    ?>
+                </select>
+            </form>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?pageNow=<?= $nextPage; ?>&p=<?= $period; ?>" aria-label="Next">
+                <span aria-hidden="true" class="text-dark fas fa-angle-right"></span>
+            </a>
+        </li>
         <li class="page-item">
             <a class="page-link" href="?pageNow=<?= $pageNow = $pageCount; ?>&p=<?= $period; ?>" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
+                <span aria-hidden="true" class="text-dark fas fa-angle-double-right"></span>
             </a>
         </li>
-    </div> -->
-    <form action="index.php" method="get">
-        <input type="hidden" name="p" value="<?=$period?>" >
-        <select name="pageNow" onchange="submit();">
-            <?php
-            for ($i = 1; $i <= $pageCount; $i++) {
-                echo "<option value='$i'>".$i."</option>";
-            }
-            ?>
-        </select>
-        <!-- <input type="submit" value="送出"> -->
-    </form>
+    </div>
+
 </div>
