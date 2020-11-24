@@ -21,16 +21,16 @@ $rows = $pdo->query($sql)->fetchall();
 ?>
 <div class="rightPage h-100 d-flex flex-column justify-content-between">
     <div class="path d-flex justify-content-evenly">
-    <nav aria-label="breadcrumb">
-  <ol class="breadcrumb w-100">
-    <li class="breadcrumb-item"><a href="?p=1">1-2月</a></li>
-    <li class="breadcrumb-item"><a href="?p=2">3-4月</a></li>
-    <li class="breadcrumb-item"><a href="?p=3">5-6月</a></li>
-    <li class="breadcrumb-item"><a href="?p=4">7-8月</a></li>
-    <li class="breadcrumb-item"><a href="?p=5">9-10月</a></li>
-    <li class="breadcrumb-item"><a href="?p=6">11-12月</a></li>
-  </ol>
-</nav>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb w-100">
+                <li class="breadcrumb-item"><a href="?p=1">1-2月</a></li>
+                <li class="breadcrumb-item"><a href="?p=2">3-4月</a></li>
+                <li class="breadcrumb-item"><a href="?p=3">5-6月</a></li>
+                <li class="breadcrumb-item"><a href="?p=4">7-8月</a></li>
+                <li class="breadcrumb-item"><a href="?p=5">9-10月</a></li>
+                <li class="breadcrumb-item"><a href="?p=6">11-12月</a></li>
+            </ol>
+        </nav>
     </div>
 
     <div class="tit d-flex w-100 my-3">
@@ -51,15 +51,15 @@ $rows = $pdo->query($sql)->fetchall();
                     <div class="t3 text-center"><?= $row['payment'] ?></div>
                     <div class="t4 text-center">
                         <a href="?do=edit_invoice&id=<?= $row['id']; ?>">
-                            <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-warning">
+                            <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-outline-warning">
                                 <p class="far fa-edit"></p>
                             </button>
                         </a>
-                        <a href="?do=del_invioce&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="刪除" class="btn btn-sm btn-danger">
+                        <a href="?do=del_invioce&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="刪除" class="btn btn-sm btn-outline-danger">
                                 <p class="fas fa-trash-alt"></p>
                             </button>
                         </a>
-                        <a href="?do=award&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="對獎" class="btn btn-sm btn-success">
+                        <a href="?do=award&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="對獎" class="btn btn-sm btn-outline-success">
                                 <p class="fas fa-medal"></p>
                             </button>
                         </a>
@@ -70,9 +70,9 @@ $rows = $pdo->query($sql)->fetchall();
             ?>
         </div>
     </div>
-    <div class="page pagination justify-content-center align-items-end">
+    <!-- <div class="page pagination justify-content-center align-items-end">
         <li class="page-item">
-            <a class="page-link" href="?pageNow=<?= $pageNow = 1; ?>&p=<?=$period; ?>" aria-label="Previous">
+            <a class="page-link" href="?pageNow=<?= $pageNow = 1; ?>&p=<?= $period; ?>" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
@@ -83,9 +83,20 @@ $rows = $pdo->query($sql)->fetchall();
         }
         ?>
         <li class="page-item">
-            <a class="page-link" href="?pageNow=<?= $pageNow = $pageCount; ?>&p=<?=$period; ?>" aria-label="Next">
+            <a class="page-link" href="?pageNow=<?= $pageNow = $pageCount; ?>&p=<?= $period; ?>" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
-    </div>
+    </div> -->
+    <form action="index.php" method="get">
+        <input type="hidden" name="p" value="<?=$period?>" >
+        <select name="pageNow">
+            <?php
+            for ($i = 1; $i <= $pageCount; $i++) {
+                echo "<option value='$i'>".$i."</option>";
+            }
+            ?>
+        </select>
+        <input type="submit" value="送出">
+    </form>
 </div>

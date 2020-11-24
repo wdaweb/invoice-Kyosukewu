@@ -615,16 +615,20 @@
       }else{
         $period = $_GET['p'];
       }
+      
+      $leftPage="main";
+      $rightPage="invoice_list";
+      
       ?>
       <div class="path1">
         <div class="p0 text-light bg-secondary mb-1"><?= $month[$period]; ?></div>
-        <div class="p1 bg-success mb-1"><a href="?do=invoice_list">當期發票</a></div>
-        <div class="p2 bg-danger mb-1"><a href="?do=award_numbers">全期對獎</a></div>
+        <div class="p1 bg-success mb-1"><a href="?in=<?=$leftPage?>&do=invoice_list">當期發票</a></div>
+        <div class="p2 bg-danger mb-1"><a href="?in=add_awards&do=award_numbers">全期對獎</a></div>
         <div class="p3 bg-dark mb-1"><a href="index.php">闔上</a></div>
       </div>
       <div class="path2">
-        <div class="p4 bg-primary mb-1"><a href="?in=main">輸入發票</a></div>
-        <div class="p5 bg-warning mb-1"><a href="?in=add_awards">輸入獎號</a></div>
+        <div class="p4 bg-primary mb-1"><a href="?in=main&do=<?=$rightPage?>">輸入發票</a></div>
+        <div class="p5 bg-warning mb-1"><a href="?in=add_awards&do=award_numbers">輸入獎號</a></div>
       </div>
       <div class="content">
         <div class="content-l col-12 col-lg-6">
