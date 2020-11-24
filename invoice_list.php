@@ -90,13 +90,13 @@ $rows = $pdo->query($sql)->fetchall();
     </div> -->
     <form action="index.php" method="get">
         <input type="hidden" name="p" value="<?=$period?>" >
-        <select name="pageNow">
+        <select name="pageNow" onchange="submit();">
             <?php
             for ($i = 1; $i <= $pageCount; $i++) {
                 echo "<option value='$i'>".$i."</option>";
             }
             ?>
         </select>
-        <input type="submit" value="送出">
+        <!-- <input type="submit" value="送出"> -->
     </form>
 </div>
