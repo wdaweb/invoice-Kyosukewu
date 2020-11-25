@@ -29,22 +29,16 @@ foreach ($awards as $aw) {
     }
 }
 
-if(empty($awards)){
-    $aw ="disabled";
-}else{
-    $aw ="";
-}
-
 ?>
 <div class="row">
     <div class="path mb-2">
         <nav class="navbar navbar-light justify-content-evenly">
-            <a href="?do=award_numbers&pd=2020-1"><button class="btn btn-sm btn-outline-secondary" type="button">1-2月</button></a>
-            <a href="?do=award_numbers&pd=2020-2"><button class="btn btn-sm btn-outline-secondary" type="button">3-4月</button></a>
-            <a href="?do=award_numbers&pd=2020-3"><button class="btn btn-sm btn-outline-secondary" type="button">5-6月</button></a>
-            <a href="?do=award_numbers&pd=2020-4"><button class="btn btn-sm btn-outline-secondary" type="button">7-8月</button></a>
-            <a href="?do=award_numbers&pd=2020-5"><button class="btn btn-sm btn-outline-secondary" type="button">9-10月</button></a>
-            <a href="?do=award_numbers&pd=2020-6"><button class="btn btn-sm btn-outline-secondary" type="button">11-12月</button></a>
+            <a href="?do=api/check_awards&pd=2020-1"><button class="btn btn-sm btn-outline-secondary" type="button">1-2月</button></a>
+            <a href="?do=api/check_awards&pd=2020-2"><button class="btn btn-sm btn-outline-secondary" type="button">3-4月</button></a>
+            <a href="?do=api/check_awards&pd=2020-3"><button class="btn btn-sm btn-outline-secondary" type="button">5-6月</button></a>
+            <a href="?do=api/check_awards&pd=2020-4"><button class="btn btn-sm btn-outline-secondary" type="button">7-8月</button></a>
+            <a href="?do=api/check_awards&pd=2020-5"><button class="btn btn-sm btn-outline-secondary" type="button">9-10月</button></a>
+            <a href="?do=api/check_awards&pd=2020-6"><button class="btn btn-sm btn-outline-secondary" type="button">11-12月</button></a>
         </nav>
     </div>
     <div class="table-container">
