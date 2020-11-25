@@ -48,15 +48,15 @@ $rows = $pdo->query($sql)->fetchall();
                     <div class="t2 text-center  text-secondary"><?= $row['date'] ?></div>
                     <div class="t3 text-center"><?= $row['payment'] ?></div>
                     <div class="t4 text-center">
-                    <a href="?id=<?= $row['id']; ?>">
-                            <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-outline-warning">
-                                <p class="far fa-edit"></p>
-                            </button>
-                        </a>
+                        <!-- 編輯 -->
+                        <button type="button" data-toggle="modal" data-target="#edit" class="btn btn-sm btn-outline-warning">
+                            <p class="far fa-edit"></p>
+                        </button>
+                        <!-- 刪除 -->
                         <button type="button" data-toggle="modal" data-target="#del" class="btn btn-sm btn-outline-danger">
                             <p class="fas fa-trash-alt"></p>
                         </button>
-
+                        <!-- 對獎 -->
                         <button type="button" data-toggle="modal" data-target="#award" class="btn btn-sm btn-outline-success">
                             <p class="fas fa-medal"></p>
                         </button>
@@ -78,68 +78,6 @@ $rows = $pdo->query($sql)->fetchall();
             <?php
             }
             ?>
-        </div>
-    </div>
-    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <?php
-                    include_once("base.php");
-                    $sql = "select * from invoices where id='{$_GET['id']}'";
-                    $inv = $pdo->query($sql)->fetch();
-                    ?>
-                    <form action="api/update_invoice.php" method="post">
-                        <input type="hidden" name="id" value="<?= $inv['id']; ?>">
-                        <div>發票號碼：<input style="width: 50px;" type="text" name="code" value="<?= $inv['code']; ?>">-<input type="number" name="number" value="<?= $inv['number']; ?>"></div>
-                        <div>消費日期：<input type="date" name="date" value="<?= $inv['date']; ?>"></div>
-                        <div>消費金額：<input type="number" name="payment" value="<?= $inv['payment']; ?>"></div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" value="修改">
-                    <input type="reset" value="重填">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="del" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="award" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
         </div>
     </div>
     <?php
@@ -185,5 +123,9 @@ $rows = $pdo->query($sql)->fetchall();
             </a>
         </li>
     </div>
-
 </div>
+<?php
+include_once("edit_invioce.php");
+include_once("del_invoice.php");
+include_once("award.php");
+?>
