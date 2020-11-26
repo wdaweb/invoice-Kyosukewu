@@ -46,31 +46,30 @@ function errFeedBack($field)
     }
 }
 
-function all($table, ...$arg)
-{
+function all($table,...$arg){
     global $pdo;
-    // echo gettype($arg);
-    $sql = "select * from $table";
-    if (isset($arg[0])) {
-        if (is_array($arg[0])) {
-            //製作會在where後的字串(陣列格式)
-            if (!empty($arg[0])) {
-                foreach ($arg[0] as $key => $value) {
-                    $tmp[] = sprintf("`%s`='%s'", $key, $value);
+    $sql="select * from $table ";
+
+    if(isset($arg[0])){
+    
+        if(is_array($arg[0])){
+            //製作會在 where 後面的句子字串(陣列格式)
+                foreach($arg[0] as $key => $value){
+                    $tmp[]=sprintf("`%s`='%s'",$key,$value);
                 }
-                $sql = $sql . " where " . implode(' && ', $tmp);
-            }
-        } else {
-            //製作非陣列的語句接$sql後
-            $sql = $sql . $arg[0];
+
+                $sql=$sql." where ".implode(' && ',$tmp);
+            
+        }else{
+            //製作非陣列的語句接在$sql後面
+                $sql=$sql.$arg[0];       
         }
     }
-    if (isset($arg[1])) {
-        //製作接在最後的句子字串
-        $sql = $sql . $arg[1];
+    if(isset($arg[1])){
+        $sql=$sql.$arg[1];
     }
-    echo $sql . "<br>";
-    return $pdo->query($sql)->fetchALL();
+    echo $sql."<br>";
+    return $pdo->query($sql)->fetchAll(); 
 }
 
 //分頁
