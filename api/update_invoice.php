@@ -11,14 +11,13 @@ include_once("../base.php");
 // where 
 // `id`='{$_POST['id']}'";
 
-$row=Finddata2('invoices',$_POST['id']);
-
+$row=find('invoices',$_POST['id']);
 $row['code']=$_POST['code'];
 $row['number']=$_POST['number'];
 $row['date']=$_POST['date'];
 $row['payment']=$_POST['payment'];
 
-save('invoices',$row);
+echo save('invoices',$row);
 
 
 // $pdo->exec($sql);

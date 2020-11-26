@@ -48,18 +48,6 @@ $rows = $pdo->query($sql)->fetchall();
                     <div class="t2 text-center  text-secondary"><?= $row['date'] ?></div>
                     <div class="t3 text-center"><?= $row['payment'] ?></div>
                     <div class="t4 text-center">
-                        <!-- 編輯 -->
-                        <!-- <button type="button" data-toggle="modal" data-target="#edit" class="btn btn-sm btn-outline-warning">
-                            <p class="far fa-edit"></p>
-                        </button> -->
-                        <!-- 刪除 -->
-                        <!-- <button type="button" data-toggle="modal" data-target="#del" class="btn btn-sm btn-outline-danger">
-                            <p class="fas fa-trash-alt"></p>
-                        </button> -->
-                        <!-- 對獎 -->
-                        <!-- <button type="button" data-toggle="modal" data-target="#award" class="btn btn-sm btn-outline-success">
-                            <p class="fas fa-medal"></p>
-                        </button> -->
                         <a href="?do=edit_invoice&id=<?= $row['id']; ?>">
                             <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-outline-warning">
                                 <p class="far fa-edit"></p>
@@ -124,8 +112,3 @@ $rows = $pdo->query($sql)->fetchall();
         </li>
     </div>
 </div>
-<?php
-include_once("edit_invioce.php");
-include_once("del_invoice.php");
-include_once("award.php");
-?>

@@ -72,20 +72,20 @@ function all($table,...$arg){
     return $pdo->query($sql)->fetchAll(); 
 }
 
-function Finddata2($table, $id)
-{
+function find($table,$id){
     global $pdo;
-    $sql = "select * from $table where ";
-    if (is_array($id)) {
-        foreach ($id as $key => $value) {
-            $tmp[] = sprintf("`%s`='%s'", $key, $value);
+    $sql="select * from $table where ";
+    if(is_array($id)){
+        foreach($id as $key => $value){
+            $tmp[]=sprintf("`%s`='%s'",$key,$value);
+            //$tmp[]="`".$key."`='".$value."'";
         }
-        $sql = $sql . implode(' && ', $tmp);
-    } else {
-        $sql = $sql . " id='$id' ";
+        $sql=$sql.implode(' && ',$tmp);
+    }else{
+        $sql=$sql . " id='$id' ";
     }
-    $row = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);  //只取欄位名稱 忽略索引   PDO::FETCH_NUM  ==>只取索引
-
+    $row=$pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+    //mysqli_fetch_assoc()
     return $row;
 }
 
@@ -119,7 +119,7 @@ function update($table,$array){
     }
     $sql=$sql.implode(",",$tmp) . " where `id`='{$array['id']}'";
     echo $sql;
-   // $pdo->exec($sql);
+    $pdo->exec($sql);
 }
 
 function insert($table,$array){
@@ -131,7 +131,6 @@ function insert($table,$array){
 }
 
 function save($table,$array){
-
         if(isset($array['id'])){
             //update
             update($table,$array);
@@ -139,7 +138,6 @@ function save($table,$array){
             //insert
             insert($table,$array);
         }
-
 }
 
 
