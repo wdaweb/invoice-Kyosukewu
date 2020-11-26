@@ -49,18 +49,18 @@ $rows = $pdo->query($sql)->fetchall();
                     <div class="t3 text-center"><?= $row['payment'] ?></div>
                     <div class="t4 text-center">
                         <!-- 編輯 -->
-                        <button type="button" data-toggle="modal" data-target="#edit" class="btn btn-sm btn-outline-warning">
+                        <!-- <button type="button" data-toggle="modal" data-target="#edit" class="btn btn-sm btn-outline-warning">
                             <p class="far fa-edit"></p>
-                        </button>
+                        </button> -->
                         <!-- 刪除 -->
-                        <button type="button" data-toggle="modal" data-target="#del" class="btn btn-sm btn-outline-danger">
+                        <!-- <button type="button" data-toggle="modal" data-target="#del" class="btn btn-sm btn-outline-danger">
                             <p class="fas fa-trash-alt"></p>
-                        </button>
+                        </button> -->
                         <!-- 對獎 -->
-                        <button type="button" data-toggle="modal" data-target="#award" class="btn btn-sm btn-outline-success">
+                        <!-- <button type="button" data-toggle="modal" data-target="#award" class="btn btn-sm btn-outline-success">
                             <p class="fas fa-medal"></p>
-                        </button>
-                        <!-- <a href="?do=edit_invoice&id=<?= $row['id']; ?>">
+                        </button> -->
+                        <a href="?do=edit_invoice&id=<?= $row['id']; ?>">
                             <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-outline-warning">
                                 <p class="far fa-edit"></p>
                             </button>
@@ -72,7 +72,7 @@ $rows = $pdo->query($sql)->fetchall();
                         <a href="?do=award&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="對獎" class="btn btn-sm btn-outline-success">
                                 <p class="fas fa-medal"></p>
                             </button>
-                        </a> -->
+                        </a>
                     </div>
                 </div>
             <?php

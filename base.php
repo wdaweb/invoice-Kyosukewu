@@ -72,6 +72,78 @@ function all($table,...$arg){
     return $pdo->query($sql)->fetchAll(); 
 }
 
-//分頁
+function Finddata2($table, $id)
+{
+    global $pdo;
+    $sql = "select * from $table where ";
+    if (is_array($id)) {
+        foreach ($id as $key => $value) {
+            $tmp[] = sprintf("`%s`='%s'", $key, $value);
+        }
+        $sql = $sql . implode(' && ', $tmp);
+    } else {
+        $sql = $sql . " id='$id' ";
+    }
+    $row = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);  //只取欄位名稱 忽略索引   PDO::FETCH_NUM  ==>只取索引
 
+    return $row;
+}
+
+
+function del($table, $id)
+{
+    global $pdo;
+    $sql = "delete from $table where ";
+    if (is_array($id)) {
+        foreach ($id as $key => $value) {
+            $tmp[] = sprintf("`%s`='%s'", $key, $value);
+        }
+        $sql = $sql . implode(' && ', $tmp);
+    } else {
+        $sql = $sql . " id='$id' ";
+    }
+
+    $row=$pdo->exec($sql);
+    return $row;
+}
+
+function update($table,$array){
+    global $pdo;
+    $sql="update $table set ";
+    foreach($array as $key => $value){
+        if($key!='id'){
+
+            $tmp[]=sprintf("`%s`='%s'",$key,$value);
+        }
+        //$tmp[]="`".$key."`='".$value."'";
+    }
+    $sql=$sql.implode(",",$tmp) . " where `id`='{$array['id']}'";
+    echo $sql;
+   // $pdo->exec($sql);
+}
+
+function insert($table,$array){
+    global $pdo;
+    $sql="insert into $table(`" . implode("`,`",array_keys($array)) . "`) values('".implode("','",$array)."')";
+
+
+    $pdo->exec($sql);
+}
+
+function save($table,$array){
+
+        if(isset($array['id'])){
+            //update
+            update($table,$array);
+        }else{
+            //insert
+            insert($table,$array);
+        }
+
+}
+
+
+function to($url){
+    header("location:".$url);
+}
 ?>

@@ -22,7 +22,10 @@ accept('number','發票號碼的欄位必填');
 // length('number',8,8,'發票號碼須為8碼數字');
 accept('payment','發票金額的欄位必填');
 
-$sql="insert into invoices (`".implode("`,`",array_keys($_POST))."`) values('".implode("','",$_POST)."')";
+// $sql="insert into invoices (`".implode("`,`",array_keys($_POST))."`) values('".implode("','",$_POST)."')";
+
+save('invoices',$_POST);
+
 
 // echo "新增完成";
 
