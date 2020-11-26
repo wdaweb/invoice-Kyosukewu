@@ -8,8 +8,6 @@ session_start();
 
 $awardStr = ['頭', '貳', '參', '肆', '伍', '陸',];
 
-
-
 //欄位檢查
 function accept($field, $meg = '此欄位不得為空')
 {
@@ -143,5 +141,10 @@ function save($table,$array){
 
 function to($url){
     header("location:".$url);
+}
+
+function q($sql){
+    global $pdo;
+    return $pdo->query($sql)->fetchALL();
 }
 ?>

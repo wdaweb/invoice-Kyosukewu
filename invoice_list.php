@@ -2,7 +2,6 @@
 //資料分頁
 $pageSize = 16; //每頁幾條紀錄
 $rowCount = $pdo->query("select count(period) from `invoices` where period='$period'")->fetch(); //共幾條紀錄
-
 $pageNow = 1; //顯示第幾頁
 $pageCount = ceil($rowCount[0] / $pageSize); //共多少頁
 if (!empty($_GET['pageNow'])) {
