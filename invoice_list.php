@@ -18,9 +18,9 @@ $rows = $pdo->query($sql)->fetchall();
 //     echo $row['code']."-".$row['number']."<br>";
 // }
 ?>
-<div class="rightPage h-100 d-flex flex-column justify-content-between">
-    <div class="path mb-2">
-        <nav class="navbar navbar-light justify-content-evenly">
+<div class="rightPage h-100 d-flex flex-column">
+    <div class="path mb-2 w-100">
+        <nav class="navbar navbar-light">
             <a href="?p=1"><button class="btn btn-sm btn-outline-secondary" type="button">1-2月</button></a>
             <a href="?p=2"><button class="btn btn-sm btn-outline-secondary" type="button">3-4月</button></a>
             <a href="?p=3"><button class="btn btn-sm btn-outline-secondary" type="button">5-6月</button></a>
@@ -36,7 +36,7 @@ $rows = $pdo->query($sql)->fetchall();
             <div class="t1 text-center">發票號碼</div>
             <div class="t2 text-center">消費日期</div>
             <div class="t3 text-center">金額</div>
-            <div class="t4 text-center">操作</div>
+            <div class="t4 text-center d-none d-sm-block">操作</div>
         </div>
         <div class="invoices w-100">
             <?php
@@ -46,7 +46,7 @@ $rows = $pdo->query($sql)->fetchall();
                     <div class="t1 text-center"><?= $row['code'] . "-" . $row['number'] ?></div>
                     <div class="t2 text-center  text-secondary"><?= $row['date'] ?></div>
                     <div class="t3 text-center"><?= $row['payment'] ?></div>
-                    <div class="t4 text-center">
+                    <div class="t4 text-center d-none d-sm-block">
                         <a href="?do=edit_invoice&id=<?= $row['id']; ?>">
                             <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-outline-warning">
                                 <p class="far fa-edit"></p>
@@ -60,6 +60,24 @@ $rows = $pdo->query($sql)->fetchall();
                                 <p class="fas fa-medal"></p>
                             </button>
                         </a>
+                    </div>
+                    <div class="t5 d-flex d-sm-none w-100">
+                    <div class="w-50 text-center">操作</div>
+                    <div class="text-right w-50 pr-1">
+                        <a href="?do=edit_invoice&id=<?= $row['id']; ?>">
+                            <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-outline-warning">
+                                <p class="far fa-edit"></p>
+                            </button>
+                        </a>
+                        <a href="?do=del_invioce&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="刪除" class="btn btn-sm btn-outline-danger">
+                                <p class="fas fa-trash-alt"></p>
+                            </button>
+                        </a>
+                        <a href="?do=award&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="對獎" class="btn btn-sm btn-outline-success">
+                                <p class="fas fa-medal"></p>
+                            </button>
+                        </a>
+                    </div>
                     </div>
                 </div>
             <?php
