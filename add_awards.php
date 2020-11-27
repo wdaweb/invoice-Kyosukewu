@@ -52,7 +52,7 @@
     </tbody>
 </table>
 <div class="send text-center mt-3">
-<input class="btn btn-outline-dark" type="submit" value="儲存">
+<input class="btn btn-outline-success" type="submit" value="儲存">
 <input class="btn btn-outline-secondary" type="reset" value="清空">
 </div>
 </form>

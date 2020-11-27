@@ -9,7 +9,7 @@
         </nav>
     </div>
 
-    <div class="tip d-flex align-items-center h-75 justify-content-center mt-5 h2 text-danger">
+    <div class="tip d-flex align-items-center h-100 justify-content-center mt-5 h2 text-danger">
       <p>Oops！該期發票並未開獎喔!</p>
     </div>
 

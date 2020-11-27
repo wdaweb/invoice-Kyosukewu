@@ -35,6 +35,6 @@
     </tbody>
 </table>
 <div class="text-center mt-4">
-    <input class="btn btn-dark" type="submit" value="送出">
+    <input class="btn btn-outline-success" type="submit" value="送出">
 </div>
 </form>

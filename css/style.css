@@ -170,13 +170,12 @@
     bottom: 0;
     right: 0;
     left: 0;
-    background: #000;
   }
 
 
   @media screen and (max-width: 576px) {
     .table-container {
-      height: 21rem;
+      height: 80%;
     }
 
     .table {
@@ -238,7 +237,7 @@
     }
 
     .table-container {
-      height: 21rem;
+      height: 80%;
     }
 
     .table {
@@ -300,7 +299,7 @@
     }
 
     .table-container {
-      height: 21rem;
+      height: 80%;
     }
 
     .table {
@@ -416,7 +415,7 @@
       border-radius: 0 15px 15px 0;
     }
     .table-container {
-      height: 80%;
+      height: 85%;
     }
     .table {
       display: flex;
@@ -531,7 +530,7 @@
       border-radius: 0 15px 15px 0;
     }
     .table-container {
-      height: 50%;
+      height: 85%%;
     }
     .table {
       display: flex;
@@ -652,7 +651,7 @@
       border-radius: 0 15px 15px 0;
     }
     .table-container {
-      height: 50%;
+      height: 85%;
     }
     .table tbody {
       overflow: auto;

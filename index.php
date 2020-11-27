@@ -55,7 +55,7 @@
       </div>
       <div class="content">
         <div class="content-l col-12 col-lg-6">
-          <div class="card-img-overlay">
+          <div class="card-img-overlay h-100">
             <?php
             if (isset($_GET['in'])) {
               $file = $_GET['in'] . ".php";
