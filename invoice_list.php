@@ -32,11 +32,11 @@ $rows = $pdo->query($sql)->fetchall();
 
 
     <div class="inv">
-        <div class="tit d-flex w-100 mb-2 border-top">
+        <div class="tit d-flex w-100 py-2 mb-3 border-top">
             <div class="t1 text-center">發票號碼</div>
             <div class="t2 text-center">消費日期</div>
             <div class="t3 text-center">金額</div>
-            <div class="t4 text-center">操作</div>
+            <div class="t4 text-center d-none d-md-block">操作</div>
         </div>
         <div class="invoices w-100">
             <?php
@@ -46,7 +46,7 @@ $rows = $pdo->query($sql)->fetchall();
                     <div class="t1 text-center"><?= $row['code'] . "-" . $row['number'] ?></div>
                     <div class="t2 text-center  text-secondary"><?= $row['date'] ?></div>
                     <div class="t3 text-center"><?= $row['payment'] ?></div>
-                    <div class="t4 text-center">
+                    <div class="t4 text-center d-none d-md-block">
                         <a href="?do=edit_invoice&id=<?= $row['id']; ?>">
                             <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-outline-warning">
                                 <p class="far fa-edit"></p>
@@ -60,6 +60,25 @@ $rows = $pdo->query($sql)->fetchall();
                                 <p class="fas fa-medal"></p>
                             </button>
                         </a>
+                    </div>
+                    <div class="t5 text-center d-flex align-items-center d-md-none w-100 mb-3">
+                        <div class="contral w-100 text-right mt-1 mr-4">
+                            <a href="?do=edit_invoice&id=<?= $row['id']; ?>">
+                                <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-outline-warning">
+                                    <span class="far fa-edit"></span><span> 編輯</span>
+                                </button>
+                            </a>
+                            <a href="?do=del_invioce&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="刪除" class="btn btn-sm btn-outline-danger">
+                                    <span class="fas fa-trash-alt"></span><span> 刪除
+                                    </span>
+                                </button>
+                            </a>
+                            <a href="?do=award&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="對獎" class="btn btn-sm btn-outline-success">
+                                    <span class="fas fa-medal"></span><span> 對獎
+                                    </span>
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             <?php
@@ -76,7 +95,7 @@ $rows = $pdo->query($sql)->fetchall();
         $nextPage = $pageCount;
     }
     ?>
-    <div class="page pagination justify-content-center align-items-end">
+    <div class="page pagination pagination-sm justify-content-center align-items-end mt-2">
         <li class="page-item">
             <a class="page-link" href="?pageNow=<?= $pageNow = 1; ?>&p=<?= $period; ?>" aria-label="Previous">
                 <span aria-hidden="true" class="text-dark fas fa-angle-double-left"></span>
@@ -90,7 +109,7 @@ $rows = $pdo->query($sql)->fetchall();
         <li class="page-item">
             <form action="index.php" method="get">
                 <input type="hidden" name="p" value="<?= $period ?>">
-                <select name="pageNow" onchange="submit();" class="form-select text-dark">
+                <select name="pageNow" onchange="submit();" class="form-select form-select-sm text-dark">
                     <?php
                     for ($i = 1; $i <= $pageCount; $i++) {
                         echo "<option value='$i'>Page-" . $i . "</option>";

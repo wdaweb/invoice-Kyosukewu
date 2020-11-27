@@ -30,8 +30,8 @@ foreach ($awards as $aw) {
 }
 
 ?>
-<div class="row">
-    <div class="path mb-2">
+<div class="row h-100">
+    <div class="path">
         <nav class="navbar navbar-light justify-content-evenly">
             <a href="?do=api/check_awards&pd=2020-1"><button class="btn btn-sm btn-outline-secondary" type="button">1-2月</button></a>
             <a href="?do=api/check_awards&pd=2020-2"><button class="btn btn-sm btn-outline-secondary" type="button">3-4月</button></a>
@@ -45,8 +45,8 @@ foreach ($awards as $aw) {
     <table class="table table-sm col-12">
         <tbody>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  col-md-3 col-lg-2 col-md-3 col-lg-2 text-center">年月份</td>
-                <td class="col-10 pl-3">
+                <td class="d-none d-md-block col-2 col-md-3 col-lg-2 text-center">年月份</td>
+                <td class="col-12 col-md-10 pl-md-3">
                     <?= $year; ?>年
                     <?php
                     $montd = [
@@ -62,64 +62,100 @@ foreach ($awards as $aw) {
                 </td>
             </tr>
             <tr>
-                <td class="td col-2  col-md-3 col-lg-2  col-md-3 col-lg-2 text-center" rowspan="2">特別獎</td>
-                <td class="pl-3"> 同期統一發票收執聯<span class="text-danger">8位數號碼</span>與特別獎號碼相同者獎金1,000萬元 </td>
+                <td class="d-none d-md-block col-2  col-md-3 col-lg-2 text-center" rowspan="2">特別獎</td>
+                <td class="pl-md-3"> 
+                    <p class="d-block d-md-none mb-0">特別獎</p>
+                    <p>同期統一發票收執聯<span class="text-danger">8位數號碼</span>與特別獎號碼相同者獎金1,000萬元</p>
+                    <p class="d-block d-md-none mb-0"><?= $special; ?></p>
+                </td>
             </tr>
             <tr>
-                <td class="pl-3">
+                <td class="d-none d-md-block pl-md-3">
                     <?= $special; ?>
                 </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  text-center" rowspan="2">特獎</td>
-                <td class="pl-3"> 同期統一發票收執聯<span class="text-danger">8位數號碼</span>與特獎號碼相同者獎金200萬元 </td>
+                <td class="d-none d-md-block col-2  col-md-3 col-lg-2  text-center" rowspan="2">特獎</td>
+                <td class="pl-md-3">
+                <p class="d-block d-md-none mb-0">特獎</p>
+                    <p>同期統一發票收執聯<span class="text-danger">8位數號碼</span>與特獎號碼相同者獎金200萬元</p>
+                    <p class="d-block d-md-none mb-0"><?= $grand; ?></p>
+                    </td>
             </tr>
             <tr>
-                <td class="pl-3">
+                <td class="d-none d-md-block pl-md-3">
                     <?= $grand; ?>
                 </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  text-center" rowspan="2">頭獎</td>
-                <td class="pl-3"> 同期統一發票收執聯<span class="text-danger">8位數號碼</span>與頭獎號碼相同者獎金20萬元 </td>
-            </tr>
-            <tr>
-                <td class="pl-3">
+                <td class="d-none d-md-block col-2  col-md-3 col-lg-2  text-center" rowspan="2">頭獎</td>
+                <td class="pl-md-3">
+                <p class="d-block d-md-none mb-0">頭獎</p>
+                    <p>同期統一發票收執聯<span class="text-danger">8位數號碼</span>與頭獎號碼相同者獎金20萬元</p>
+                    <p class="d-block d-md-none mb-0">
                     <?php
                     foreach ($first as $f) {
-                        echo $f . "";
+                        echo $f . "<br>";
+                    }
+                    ?>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class="d-none d-md-block pl-md-3 mb-0">
+                    <?php
+                    foreach ($first as $f) {
+                        echo $f . "<br>";
                     }
                     ?>
                 </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  text-center">二獎</td>
-                <td class="pl-3"> 同期統一發票收執聯末7 位數號碼與頭獎中獎號碼<span class="text-danger">末7位</span>相同者各得獎金4萬元 </td>
+                <td class="d-none d-md-block col-2  col-md-3 col-lg-2  text-center">二獎</td>
+                <td class="pl-md-3">
+                    <p class="d-block d-md-none mb-0">二獎</p>
+                    <p>同期統一發票收執聯末7 位數號碼與頭獎中獎號碼<span class="text-danger">末7位</span>相同者各得獎金4萬元</p>
+                </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  text-center">三獎</td>
-                <td class="pl-3"> 同期統一發票收執聯末6 位數號碼與頭獎中獎號碼<span class="text-danger">末6位</span>相同者各得獎金1萬元 </td>
+                <td class="d-none d-md-block col-2  col-md-3 col-lg-2  text-center">三獎</td>
+                <td class="pl-md-3">
+                    <p class="d-block d-md-none mb-0">三獎</p>
+                    <p>同期統一發票收執聯末6 位數號碼與頭獎中獎號碼<span class="text-danger">末6位</span>相同者各得獎金1萬元</p>
+                </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  text-center">四獎</td>
-                <td class="pl-3"> 同期統一發票收執聯末5 位數號碼與頭獎中獎號碼<span class="text-danger">末5位</span>相同者各得獎金4千元 </td>
+                <td class="d-none d-md-block col-2  col-md-3 col-lg-2  text-center">四獎</td>
+                <td class="pl-md-3">
+                    <p class="d-block d-md-none mb-0">四獎</p>
+                    <p>同期統一發票收執聯末5 位數號碼與頭獎中獎號碼<span class="text-danger">末5位</span>相同者各得獎金4千元</p>
+                </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  text-center">五獎</td>
-                <td class="pl-3"> 同期統一發票收執聯末4 位數號碼與頭獎中獎號碼<span class="text-danger">末4位</span>相同者各得獎金1千元 </td>
+                <td class="d-none d-md-block col-2  col-md-3 col-lg-2  text-center">五獎</td>
+                <td class="pl-md-3">
+                    <p class="d-block d-md-none mb-0">五獎</p>
+                    <p>同期統一發票收執聯末4 位數號碼與頭獎中獎號碼<span class="text-danger">末4位</span>相同者各得獎金1千元</p>
+                </td>
             </tr>
             <tr>
-                <td class="col-2  col-md-3 col-lg-2  text-center">六獎</td>
-                <td class="pl-3"> 同期統一發票收執聯末3 位數號碼與頭獎中獎號碼<span class="text-danger">末3位</span>相同者各得獎金2百元 </td>
+                <td class="d-none d-md-block col-2  col-md-3 col-lg-2  text-center">六獎</td>
+                <td class="pl-md-3">
+                    <p class="d-block d-md-none mb-0">六獎</p>
+                    <p>同期統一發票收執聯末3 位數號碼與頭獎中獎號碼<span class="text-danger">末3位</span>相同者各得獎金2百元</p>
+                </td>
             </tr>
             <tr>
-                <td class="col-2  col-lg-3  text-center">增開六獎</td>
-                <td class="pl-3">
+                <td class="d-none d-md-block col-2  col-lg-3  text-center">增開六獎</td>
+                <td class="pl-md-3">
+                    <p class="d-block d-md-none mb-0">增開六獎</p>
+                    <p>
                     <?php
                     foreach ($six as $s) {
                         echo $s . "&nbsp&nbsp&nbsp";
                     }
                     ?>
+                    </p>
                 </td>
             </tr>
         </tbody>
