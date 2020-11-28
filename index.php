@@ -245,35 +245,39 @@ include_once("base.php")
 
   .overlay {
     position: absolute;
-    top: 0;
-    right: 50%;
-    bottom: 0;
-    left: -50%;
+    top: -50%;
+    right: 0%;
+    bottom: 50%;
+    left: 0%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-  .edit{
-    width: 30vw;
+
+  .edit {
+    width: 95vw;
     height: 25vh;
     background: rgba(255, 255, 255, .5);
     border-radius: 0 0 1rem 1rem;
     box-shadow: 5px 5px 10px #333;
     padding: 1rem;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
   }
-  .title{
+
+  .title {
     text-align: center;
     font-size: 1.2rem;
-    width: 30vw;
+    width: 95vw;
     height: 2.5rem;
     line-height: 2.5rem;
     border-radius: 1rem 1rem 0 0;
     position: relative;
   }
-  .title a{
+
+  .title a {
     text-decoration: none;
     color: #fff;
     position: absolute;
@@ -281,20 +285,29 @@ include_once("base.php")
     right: 5%;
     bottom: 0;
   }
-  .mainedit{
+
+  .mainedit {
     display: flex;
   }
-  .text{
+
+  .text {
+    text-align: center;
     width: 30%;
   }
-  .work{
+
+  .work {
     width: 70%;
   }
-  .i1{
-    width: 15%;
+
+  .i1 {
+    width: 20%;
   }
-  .i2{
+
+  .i2 {
     width: 75%;
+  }
+  .i3{
+    width: 100%;
   }
 
   @media screen and (min-width: 375px) {
@@ -387,6 +400,14 @@ include_once("base.php")
 
     .bg4 {
       bottom: 0;
+    }
+    .edit,.title{
+      width: 50vw;
+    }
+  }
+  @media screen and (min-height: 900px){
+    .edit{
+      height: 15vw;
     }
   }
 
@@ -505,6 +526,16 @@ include_once("base.php")
 
     .inv {
       height: 85%;
+    }
+
+    .overlay {
+      top: 0;
+      right: 50%;
+      bottom: 0;
+      left: -50%;
+    }
+    .edit,.title{
+      width: 30vw;
     }
   }
 
