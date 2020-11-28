@@ -3,7 +3,6 @@ include_once("base.php")
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -12,10 +11,11 @@ include_once("base.php")
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a1381bb91e.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="css/style.css">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
   <title>統一發票紀錄及對獎系統</title>
 </head>
 <style>
+  
   body {
     width: 100vw;
     height: 100vh;
@@ -258,7 +258,8 @@ include_once("base.php")
   .edit {
     width: 95vw;
     height: 25vh;
-    background: rgba(255, 255, 255, .5);
+    background: rgba(255, 255, 255, .6);
+    backdrop-filter: blur(2px);
     border-radius: 0 0 1rem 1rem;
     box-shadow: 5px 5px 10px #333;
     padding: 1rem;
@@ -324,7 +325,7 @@ include_once("base.php")
     }
 
     .path2 {
-      top: -3.5%;
+      top: -3%;
     }
   }
 
@@ -373,9 +374,19 @@ include_once("base.php")
       background: url(https://i.postimg.cc/8CP4mv8n/right-bg.jpg);
       background-size: cover;
     }
+    .edit,.title{
+      width: 60vw;
+    }
   }
 
   @media screen and (min-width: 768px) {
+    .p0,
+  .p1,
+  .p2,
+  .p3 {
+    align-items: center;
+    border-radius:5px 5px 0 0;
+  }
     .ll {
       width: 30%;
     }
@@ -404,13 +415,10 @@ include_once("base.php")
     .edit,.title{
       width: 50vw;
     }
-  }
-  @media screen and (min-height: 900px){
     .edit{
-      height: 15vw;
+      height: 30vh;
     }
   }
-
   @media screen and (min-width: 992px) {
     .t1 {
       width: 30%;
@@ -535,7 +543,10 @@ include_once("base.php")
       left: -50%;
     }
     .edit,.title{
-      width: 30vw;
+      width: 35vw;
+    }
+    .edit{
+      height: 20vh;
     }
   }
 
@@ -589,6 +600,9 @@ include_once("base.php")
       background: url(https://i.postimg.cc/D0VLb3fc/bgbook.png) no-repeat center center;
       background-size: 100% 100%;
     }
+    .edit,.title{
+      width: 25vw;
+    }
   }
 
   @media screen and (min-width: 1400px) {
@@ -627,7 +641,6 @@ include_once("base.php")
     }
   }
 </style>
-
 <body>
   <div class="bg">
     <img class="bg1" src="https://i.postimg.cc/WbXLXfFs/bg1.png" alt="">
