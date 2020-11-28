@@ -28,7 +28,7 @@
                     <?php errFeedBack('code'); ?><?php errFeedBack('number'); ?></td>
             </tr>
             <tr>
-                <td class="ll pt-2 pt-md-3  pr-3">發票金額</td>
+                <td class="ll pt-2 pt-md-3 pr-3">發票金額</td>
                 <td class="pt-2 pt-md-3"><input type="number" name="payment" class="w-100"><?php errFeedBack('payment'); ?></td>
                 
             </tr>

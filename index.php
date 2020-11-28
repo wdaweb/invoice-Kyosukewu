@@ -1,4 +1,6 @@
-<?php include_once("base.php") ?>
+<?php
+include_once("base.php")
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a1381bb91e.js" crossorigin="anonymous"></script>
-  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <link rel="stylesheet" href="css/style.css">
   <title>統一發票紀錄及對獎系統</title>
 </head>
 <style>
@@ -77,6 +79,7 @@
   .p3 {
     align-items: flex-start;
   }
+
   .p0,
   .p1,
   .p2,
@@ -84,7 +87,7 @@
     align-items: flex-start;
     border-radius: 0 0 5px 5px;
   }
-  
+
   .p0-2,
   .p4,
   .p5 {
@@ -168,7 +171,7 @@
   }
 
   .inv {
-    height: 85%;
+    height: 70%;
     overflow: auto;
   }
 
@@ -183,9 +186,10 @@
 
   .path,
   .page {
-    height: 10%;
+    height: 5%;
   }
-  .aw{
+
+  .aw {
     height: 5%;
   }
 
@@ -212,37 +216,110 @@
     height: 100%;
     margin: 0;
   }
-  .table-container{
+
+  .table-container {
+    margin-top: 1rem;
     width: 100%;
-    height: 60%;
+    height: 70%;
   }
 
   .table tbody {
-    overflow-y: scroll;
+    overflow-y: auto;
   }
-  thead td{
-      padding-bottom: 5px;
+
+  thead td {
+    padding-bottom: 5px;
+  }
+
+  .md {
+    display: none;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .six {
+    width: 32%;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    right: 50%;
+    bottom: 0;
+    left: -50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .edit{
+    width: 30vw;
+    height: 25vh;
+    background: rgba(255, 255, 255, .5);
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 5px 5px 10px #333;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  .title{
+    text-align: center;
+    font-size: 1.2rem;
+    width: 30vw;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    border-radius: 1rem 1rem 0 0;
+    position: relative;
+  }
+  .title a{
+    text-decoration: none;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 5%;
+    bottom: 0;
+  }
+  .mainedit{
+    display: flex;
+  }
+  .text{
+    width: 30%;
+  }
+  .work{
+    width: 70%;
+  }
+  .i1{
+    width: 15%;
+  }
+  .i2{
+    width: 75%;
   }
 
   @media screen and (min-width: 375px) {
-    .table-container{
-    height: 70%;
-  }
-    thead td{
+    .table-container {
+      height: 70%;
+    }
+
+    thead td {
       padding-bottom: 16px;
     }
+
     .path1 {
       bottom: -3%;
     }
+
     .path2 {
       top: -3.5%;
     }
   }
 
   @media screen and (min-width: 576px) {
-    .table-container{
-    height: 80%;
-  }
+    .table-container {
+      height: 80%;
+    }
+
     .bg1,
     .bg2,
     .bg3,
@@ -287,7 +364,7 @@
 
   @media screen and (min-width: 768px) {
     .ll {
-      width: 25%;
+      width: 30%;
     }
 
     .path1,
@@ -314,6 +391,19 @@
   }
 
   @media screen and (min-width: 992px) {
+    .t1 {
+      width: 30%;
+    }
+
+    .t2,
+    .t4 {
+      width: 30%;
+    }
+
+    .t3 {
+      width: 10%;
+    }
+
     .path1 {
       display: block;
       top: 5%;
@@ -325,11 +415,18 @@
       top: 5%;
       left: -6%;
     }
-    .p0,.p1,.p2,.p3,.p4,.p5{
+
+    .p0,
+    .p1,
+    .p2,
+    .p3,
+    .p4,
+    .p5 {
       width: 100px;
       transform: matrix(1, 0, 0, 1, 0, 0);
       transition: transform 0.5s 0s ease;
     }
+
     .p0,
     .p1,
     .p2,
@@ -343,6 +440,7 @@
     .p3:hover {
       transform: matrix(0.8, -0.25, 0, 1, 0, -10);
     }
+
     .p4,
     .p5 {
       justify-content: flex-start;
@@ -353,6 +451,7 @@
     .p5:hover {
       transform: matrix(0.8, 0.25, 0, 1, 0, -10);
     }
+
     .bg1 {
       top: -40%;
     }
@@ -394,21 +493,41 @@
       background-size: 100% 100%;
       border-radius: 0 15px 15px 0;
     }
+
+    .md {
+      display: table-cell;
+    }
+
+    .table-container {
+      width: 100%;
+      height: 88%;
+    }
+
+    .inv {
+      height: 85%;
+    }
   }
 
   @media screen and (min-width: 1200px) {
     .path1 {
       right: -6%;
     }
+
     .path2 {
       left: -5%;
     }
 
-    .p0,.p1,.p2,.p3,.p4,.p5{
+    .p0,
+    .p1,
+    .p2,
+    .p3,
+    .p4,
+    .p5 {
       width: 100px;
       transform: matrix(1, 0, 0, 1, 0, 0);
       transition: transform 0.5s 0s ease;
     }
+
     .p0,
     .p1,
     .p2,
@@ -422,6 +541,7 @@
     .p3:hover {
       transform: matrix(0.8, -0.25, 0, 1, 0, -10);
     }
+
     .p4,
     .p5 {
       justify-content: flex-start;
@@ -487,27 +607,17 @@
   <div class="container">
     <div class="book">
       <?php
-      $month = [
-        1 => "1-2月",
-        2 => "3-4月",
-        3 => "5-6月",
-        4 => "7-8月",
-        5 => "9-10月",
-        6 => "11-12月",
-      ];
       // $m = ceil(date("m") / 2);
       if (empty($_GET['p'])) {
         $period = ceil(date("m") / 2);
       } else {
         $period = $_GET['p'];
       }
-
       $leftPage = "main";
       $rightPage = "invoice_list";
-
       ?>
       <div class="path1">
-        <div class="p0 text-light bg-info d-none d-md-flex"><a href="#"><?= $month[$period]; ?></a></div>
+        <div class="p0 text-light bg-info d-none d-md-flex mb-1"><a href="#"><?= $month[$period]; ?></a></div>
         <div class="p1 bg-success mb-1"><a href="?in=<?= $leftPage ?>&do=invoice_list">當期發票</a></div>
         <div class="p2 bg-danger mb-1"><a href="?in=add_awards&do=award_numbers">全期對獎</a></div>
         <div class="p3 bg-dark mb-1"><a href="index.php">闔上</a></div>
@@ -521,6 +631,7 @@
         <div class="content-l col-12 col-lg-6">
           <div class="card-img-overlay">
             <?php
+            ob_start();
             if (isset($_GET['in'])) {
               $file = $_GET['in'] . ".php";
               include $file;
@@ -529,11 +640,11 @@
             }
             ?>
           </div>
-
         </div>
         <div class="content-r col-12 col-lg-6">
           <div class="card-img-overlay">
             <?php
+            ob_start();
             if (isset($_GET['do'])) {
               $file = $_GET['do'] . ".php";
               include $file;

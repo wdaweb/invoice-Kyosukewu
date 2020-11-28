@@ -1,6 +1,13 @@
 <?php
+include_once("base.php");
+//期別查詢
+$get_new = $pdo->query("select * from `award_numbers` order by year desc,period desc limit 1")->fetch();
+$nyear = $get_new['year'];
+$nperiod = $get_new['period'];
+$year =  !empty($_GET['p']) ? explode("-", $_GET['p'])[0] : $nyear;
+$period = !empty($_GET['p']) ? explode("-", $_GET['p'])[1] : $nperiod;
 //資料分頁
-$pageSize = 16; //每頁幾條紀錄
+$pageSize = 19; //每頁幾條紀錄
 $rowCount = $pdo->query("select count(period) from `invoices` where period='$period'")->fetch(); //共幾條紀錄
 $pageNow = 1; //顯示第幾頁
 $pageCount = ceil($rowCount[0] / $pageSize); //共多少頁
@@ -19,7 +26,42 @@ $rows = $pdo->query($sql)->fetchall();
 // }
 ?>
 <div class="rightPage h-100 d-flex flex-column justify-content-between">
-    <div class="path mb-2">
+<div class="path">
+        <div class="pagination pagination-sm justify-content-center align-items-end mt-lg-2">
+            <li class="page-item">
+                <a class="page-link" href="?do=api/check_awards&pd=<?=$year?>-<?= $period - 1; ?>">
+                    <span aria-hidden="true" class="text-dark fas fas fa-angle-left"></span>
+                </a>
+            </li>
+            <li class="page-item">
+                <form class="d-flex" action="index.php" method="get">
+                    <select name="y" onchange="submit();" class="form-select form-select-sm text-dark">
+                        <option value="<?= $year-1 ?>"><?= $year-1 ?></option>
+                        <option value="<?= $year ?>" selected><?= $year ?></option>
+                        <option value="<?= $year+1 ?>"><?= $year+1 ?></option>
+                    </select>
+                    <select name="p" onchange="submit();" class="form-select form-select-sm text-dark">
+                        <?php
+                        for ($i = 1; $i < 7; $i++) {
+                            if($i==$period){
+                                echo "<option value='$i' selected>";
+                            }else{
+                                echo "<option value='$i'>";
+                            }
+                            echo "$month[$i]" . "</option>";
+                        }
+                        ?>
+                    </select>
+                </form>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?do=api/check_awards&pd=<?=$year?>-<?= $period + 1; ?>">
+                    <span aria-hidden="true" class="text-dark fas fa-angle-right"></span>
+                </a>
+            </li>
+        </div>
+    </div>
+    <!-- <div class="path mb-2">
         <nav class="navbar navbar-light justify-content-evenly">
             <a href="?p=1"><button class="btn btn-sm btn-outline-secondary" type="button">1-2月</button></a>
             <a href="?p=2"><button class="btn btn-sm btn-outline-secondary" type="button">3-4月</button></a>
@@ -28,7 +70,7 @@ $rows = $pdo->query($sql)->fetchall();
             <a href="?p=5"><button class="btn btn-sm btn-outline-secondary" type="button">9-10月</button></a>
             <a href="?p=6"><button class="btn btn-sm btn-outline-secondary" type="button">11-12月</button></a>
         </nav>
-    </div>
+    </div> -->
 
 
     <div class="inv">
@@ -95,7 +137,7 @@ $rows = $pdo->query($sql)->fetchall();
         $nextPage = $pageCount;
     }
     ?>
-    <div class="page pagination pagination-sm justify-content-center align-items-end mt-2">
+    <div class="page pagination pagination-sm justify-content-center align-items-end mb-0 mb-md-2 mt-lg-2">
         <li class="page-item">
             <a class="page-link" href="?pageNow=<?= $pageNow = 1; ?>&p=<?= $period; ?>" aria-label="Previous">
                 <span aria-hidden="true" class="text-dark fas fa-angle-double-left"></span>

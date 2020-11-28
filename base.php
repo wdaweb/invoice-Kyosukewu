@@ -7,7 +7,14 @@ date_default_timezone_set("Asia/Taipei");
 session_start();
 
 $awardStr = ['頭', '貳', '參', '肆', '伍', '陸',];
-
+$month = [
+    1 => "1-2月",
+    2 => "3-4月",
+    3 => "5-6月",
+    4 => "7-8月",
+    5 => "9-10月",
+    6 => "11-12月",
+];
 //欄位檢查
 function accept($field, $meg = '此欄位不得為空')
 {
