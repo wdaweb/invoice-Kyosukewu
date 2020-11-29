@@ -9,8 +9,8 @@
         <tr>
             <td class="ll pt-2 pt-md-3 pr-3">年月份</td>
             <td  class="pt-2 pt-md-3">
-                <input class="w-50" type="number" name="year" min="<?=date("Y")-1;?>" max="<?=date("Y")+1;?>" step="1" value="<?=date("Y");?>">年
-                <select name="period" class="w-25">
+                <input style="width:25%;" type="number" name="year" min="<?=date("Y")-1;?>" max="<?=date("Y")+1;?>" step="1" value="<?=date("Y");?>">年
+                <select name="period" style="width:35%;">
                 <option value="1">01~02</option>
                 <option value="2">03~04</option>
                 <option value="3">05~06</option>

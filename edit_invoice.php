@@ -170,8 +170,8 @@ $inv = $pdo->query($sql)->fetch();
             </div>
         </div>
         <div class="text-center">
-            <input type="submit" value="修改">
-            <input type="reset" value="重填">
+            <input class="btn btn-outline-warning" type="submit" value="修改">
+            <input class="btn btn-outline-dark" type="reset" value="重填">
         <div>
     </form>
 </div>
