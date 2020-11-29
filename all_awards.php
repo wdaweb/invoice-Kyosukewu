@@ -10,8 +10,6 @@ $period_str=[
     6=>'11,12月'
 ];
 
-
-
 echo $_GET['year']."年";
 echo $period_str[$_GET['period']]."單期發票對獎，";
 //撈出該期發票
@@ -35,6 +33,8 @@ $award_numbers=$pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);//PDO::FETCH_ASSOC 
 
 //開始對獎
 $all_res=-1;
+$count_res=0;
+$count_award=0;
 foreach($invoices as $inv){
     
     $number=$inv['number'];
@@ -43,16 +43,20 @@ foreach($invoices as $inv){
         switch($award['type']){
             case 1: //特別獎
                 if($award['number']==$number){
-                    echo "<br>號碼=".$number."<br>";
+                    echo "<br>發票號碼：".$number."<br>";
                     echo "<br>中了特別獎<br>";
                     $all_res=1;
+                    $count_res=$count_res+1;
+                    $count_award=$count_award+10000000;
                 }
             break;
             case 2://特獎          
                 if($award['number']==$number){
-                    echo "<br>號碼=".$number."<br>";
+                    echo "<br>發票號碼：".$number."<br>";
                     echo "中了特獎<br>";
                     $all_res=1;
+                    $count_res=$count_res+1;
+                    $count_award=$count_award+2000000;
                 }
             break;
             case 3://頭獎
@@ -61,7 +65,6 @@ foreach($invoices as $inv){
                     $target=mb_substr($award['number'],$i,(8-$i),'utf8');
                     $mynumber=mb_substr($number,$i,(8-$i),'utf8');
                     if($target==$mynumber){
-                        
                         $res=$i;
                     }else{
                         break;
@@ -70,16 +73,39 @@ foreach($invoices as $inv){
                 }
                 //判斷最後中的獎項
                 if($res!=-1){
-                    echo "<br>號碼=".$number."<br>";
+                    echo "<br>發票號碼：".$number."<br>";
                     echo "中了{$awardStr[$res]}獎<br>";
                     $all_res=1;
+                    $count_res=$count_res+1;
+                    switch($awardStr[$res]){
+                        case "頭":
+                            $count_award=$count_award+200000;
+                        break;
+                        case "貳":
+                            $count_award=$count_award+40000;
+                        break;
+                        case "參":
+                            $count_award=$count_award+10000;
+                        break;
+                        case "肆":
+                            $count_award=$count_award+4000;
+                        break;
+                        case "伍":
+                            $count_award=$count_award+1000;
+                        break;
+                        case "陸":
+                            $count_award=$count_award+200;
+                        break;
+                    }
                 }
             break;
             case 4://增開六獎
                 if($award['number']==mb_substr($number,5,3,'utf8')){
-                    echo "<br>號碼=".$number."<br>";
+                    echo "<br>發票號碼：".$number."<br>";
                     $all_res=1;
-                    echo "中了增開六獎";
+                    $count_res=$count_res+1;
+                    $count_award=$count_award+200;
+                    echo "中了增開六獎<br>";
                 }
             break;
         }
@@ -89,4 +115,6 @@ if($all_res==-1){
     echo "可惜不是你,再接再厲吧";
 }
 
+echo "總共中了".$count_res."張發票";
+echo "共計獎金".$count_award."元";
 ?>
