@@ -3,7 +3,7 @@ include_once("base.php");
 //期別查詢
 $get_new = $pdo->query("select * from `invoices` order by date desc,period desc limit 1")->fetch(PDO::FETCH_ASSOC);
 
-$nyear = mb_substr($get_new['date'],0,4);
+$nyear = mb_substr($get_new['date'], 0, 4);
 $nperiod = $get_new['period'];
 $year =  !empty($_GET['y']) ?  $_GET['y'] : $nyear;
 $period = !empty($_GET['p']) ?  $_GET['p'] : $nperiod;
@@ -33,17 +33,22 @@ $rows = $pdo->query($sql)->fetchall(PDO::FETCH_ASSOC);
 <div class="rightPage h-100 d-flex flex-column justify-content-between">
     <div class="path">
         <div class="pagination pagination-sm justify-content-center align-items-end mt-lg-2">
+            <!-- <li class="page-item">
+                <a class="page-link" href="?do=check_invoices&y=<?= $year ?>&p=<?= $period - 1; ?>">
+                    <span aria-hidden="true" class="text-dark fas fas fa-angle-left"></span>
+                </a>
+            </li> -->
             <li class="page-item">
                 <form class="d-flex" action="check_invoices.php" method="get">
                     <select name="y" onchange="submit();" class="form-select form-select-sm text-dark">
                         <?php
-                        for($y=$nyear-1;$y<$nyear+2;$y++){
+                        for ($y = $nyear - 1; $y < $nyear + 2; $y++) {
                             if ($y == $year) {
                                 echo "<option value='$y' selected>";
                             } else {
                                 echo "<option value='$y'>";
                             }
-                            echo  $y. "</option>";
+                            echo  $y . "</option>";
                         }
                         ?>
                     </select>
@@ -61,6 +66,11 @@ $rows = $pdo->query($sql)->fetchall(PDO::FETCH_ASSOC);
                     </select>
                 </form>
             </li>
+            <!-- <li class="page-item">
+                <a class="page-link" href="?do=check_invoices&y=<?= $year ?>&p=<?= $period + 1; ?>">
+                    <span aria-hidden="true" class="text-dark fas fa-angle-right"></span>
+                </a>
+            </li> -->
         </div>
     </div>
     <div class="inv">
@@ -72,18 +82,18 @@ $rows = $pdo->query($sql)->fetchall(PDO::FETCH_ASSOC);
         </div>
         <div class="invoices w-100">
             <?php
-            if(!empty($_GET['ex'])){
+            if (!empty($_GET['ex'])) {
             ?>
-            <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">本期發票已過兌獎期限！
-            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
-            </div>
+                <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">本期發票已過兌獎期限！
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
             <?php
             }
-            if(!empty($_GET['emp'])){
+            if (!empty($_GET['emp'])) {
             ?>
-            <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">本期尚未有發票登錄，請由左側表單輸入
-            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
-            </div>
+                <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">本期尚未有發票登錄，請由左側表單輸入
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
             <?php
             }
             foreach ($rows as $row) {
