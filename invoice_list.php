@@ -26,26 +26,26 @@ $rows = $pdo->query($sql)->fetchall();
 // }
 ?>
 <div class="rightPage h-100 d-flex flex-column justify-content-between">
-<div class="path">
+    <div class="path">
         <div class="pagination pagination-sm justify-content-center align-items-end mt-lg-2">
             <li class="page-item">
-                <a class="page-link" href="?do=api/check_awards&pd=<?=$year?>-<?= $period - 1; ?>">
+                <a class="page-link" href="?do=api/check_awards&pd=<?= $year ?>-<?= $period - 1; ?>">
                     <span aria-hidden="true" class="text-dark fas fas fa-angle-left"></span>
                 </a>
             </li>
             <li class="page-item">
                 <form class="d-flex" action="index.php" method="get">
                     <!-- <select name="y" onchange="submit();" class="form-select form-select-sm text-dark">
-                        <option value="<?= $year-1 ?>"><?= $year-1 ?></option>
+                        <option value="<?= $year - 1 ?>"><?= $year - 1 ?></option>
                         <option value="<?= $year ?>" selected><?= $year ?></option>
-                        <option value="<?= $year+1 ?>"><?= $year+1 ?></option>
+                        <option value="<?= $year + 1 ?>"><?= $year + 1 ?></option>
                     </select> -->
                     <select name="p" onchange="submit();" class="form-select form-select-sm text-dark">
                         <?php
                         for ($i = 1; $i < 7; $i++) {
-                            if($i==$period){
+                            if ($i == $period) {
                                 echo "<option value='$i' selected>";
-                            }else{
+                            } else {
                                 echo "<option value='$i'>";
                             }
                             echo "$month[$i]" . "</option>";
@@ -55,7 +55,7 @@ $rows = $pdo->query($sql)->fetchall();
                 </form>
             </li>
             <li class="page-item">
-                <a class="page-link" href="?do=api/check_awards&pd=<?=$year?>-<?= $period + 1; ?>">
+                <a class="page-link" href="?do=api/check_awards&pd=<?= $year ?>-<?= $period + 1; ?>">
                     <span aria-hidden="true" class="text-dark fas fa-angle-right"></span>
                 </a>
             </li>
@@ -153,12 +153,10 @@ $rows = $pdo->query($sql)->fetchall();
                 <input type="hidden" name="p" value="<?= $period ?>">
                 <select name="pageNow" onchange="submit();" class="form-select form-select-sm text-dark">
                     <?php
-                    for ($i = 0; $i <= $pageCount; $i++) {
-                        if($i==0){
-                            echo "<option value='$i'></option>";
-                        }elseif($pageNow==$i){
+                    for ($i = 1; $i <= $pageCount; $i++) {
+                        if ($_GET['pageNow'] == $i) {
                             echo "<option value='$i' selected>Page-" . $i . "</option>";
-                        }else{
+                        } else {
                             echo "<option value='$i'>Page-" . $i . "</option>";
                         }
                     }
