@@ -2,10 +2,10 @@
 include_once("base.php");
 //期別查詢
 $get_new = $pdo->query("select * from `award_numbers` order by year desc,period desc limit 1")->fetch();
-$nyear = $get_new['year'];
-$nperiod = $get_new['period'];
-$year =  !empty($_GET['p']) ? explode("-", $_GET['p'])[0] : $nyear;
-$period = !empty($_GET['p']) ? explode("-", $_GET['p'])[1] : $nperiod;
+// $nyear = $get_new['y'];
+// $nperiod = $get_new['p'];
+// $year =  !empty($_GET['p']) ? explode("-", $_GET['p'])[0] : $nyear;
+// $period = !empty($_GET['p']) ? explode("-", $_GET['p'])[1] : $nperiod;
 //資料分頁
 $pageSize = 19; //每頁幾條紀錄
 $rowCount = $pdo->query("select count(period) from `invoices` where period='$period'")->fetch(); //共幾條紀錄
@@ -35,11 +35,11 @@ $rows = $pdo->query($sql)->fetchall();
             </li>
             <li class="page-item">
                 <form class="d-flex" action="index.php" method="get">
-                    <select name="y" onchange="submit();" class="form-select form-select-sm text-dark">
+                    <!-- <select name="y" onchange="submit();" class="form-select form-select-sm text-dark">
                         <option value="<?= $year-1 ?>"><?= $year-1 ?></option>
                         <option value="<?= $year ?>" selected><?= $year ?></option>
                         <option value="<?= $year+1 ?>"><?= $year+1 ?></option>
-                    </select>
+                    </select> -->
                     <select name="p" onchange="submit();" class="form-select form-select-sm text-dark">
                         <?php
                         for ($i = 1; $i < 7; $i++) {
@@ -153,8 +153,14 @@ $rows = $pdo->query($sql)->fetchall();
                 <input type="hidden" name="p" value="<?= $period ?>">
                 <select name="pageNow" onchange="submit();" class="form-select form-select-sm text-dark">
                     <?php
-                    for ($i = 1; $i <= $pageCount; $i++) {
-                        echo "<option value='$i'>Page-" . $i . "</option>";
+                    for ($i = 0; $i <= $pageCount; $i++) {
+                        if($i==0){
+                            echo "<option value='$i'></option>";
+                        }elseif($pageNow==$i){
+                            echo "<option value='$i' selected>Page-" . $i . "</option>";
+                        }else{
+                            echo "<option value='$i'>Page-" . $i . "</option>";
+                        }
                     }
                     ?>
                 </select>
