@@ -45,9 +45,16 @@ if ($period > 6) {
                 <form class="d-flex" action="index.php" method="get">
                     <input type="hidden" name="do" value="api/check_awards">
                     <select name="y" onchange="submit();" class="form-select form-select-sm text-dark">
-                        <option value="<?= $year-1 ?>"><?= $year-1 ?></option>
-                        <option value="<?= $year ?>" selected><?= $year ?></option>
-                        <option value="<?= $year+1 ?>"><?= $year+1 ?></option>
+                        <?php
+                        for($y=$nyear-1;$y<$nyear+2;$y++){
+                            if ($y == $year) {
+                                echo "<option value='$y' selected>";
+                            } else {
+                                echo "<option value='$y'>";
+                            }
+                            echo  $y. "</option>";
+                        }
+                        ?>
                     </select>
                     <select name="pd" onchange="submit();" class="form-select form-select-sm text-dark">
                         <?php

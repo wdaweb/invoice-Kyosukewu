@@ -3,6 +3,7 @@ include_once("base.php")
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -34,16 +35,16 @@ include_once("base.php")
 
       $leftPage = "main";
       $rightPage = "invoice_list";
-      
-      if(empty($_GET['in'])){
+
+      if (empty($_GET['in'])) {
         $leftPage = "main";
-      }else{
-        $leftPage=$_GET['in'];
+      } else {
+        $leftPage = $_GET['in'];
       }
-      if(empty($_GET['do'])){
+      if (empty($_GET['do'])) {
         $rightPage = "invoice_list";
-      }else{
-        $rightPage=$_GET['do'];
+      } else {
+        $rightPage = $_GET['do'];
       }
       ?>
       <div class="path1">
@@ -99,5 +100,9 @@ include_once("base.php")
   var toastElList = [].slice.call(document.querySelectorAll('.toast'))
   var toastList = toastElList.map(function(toastEl) {
     return new bootstrap.Toast(toastEl, option)
+  })
+  var alertList = document.querySelectorAll('.alert')
+  alertList.forEach(function(alert) {
+    new bootstrap.Alert(alert)
   })
 </script>
