@@ -4,8 +4,8 @@ include_once("base.php");
 $get_new = $pdo->query("select * from `award_numbers` order by year desc,period desc limit 1")->fetch();
 $nyear = $get_new['year'];
 $nperiod = $get_new['period'];
-$year =  !empty($_GET['p']) ? explode("-", $_GET['p'])[0] : $nyear;
-$period = !empty($_GET['p']) ? explode("-", $_GET['p'])[1] : $nperiod;
+$year =  !empty($_GET['y']) ? $_GET['y'] : $nyear;
+$period = !empty($_GET['p']) ? $_GET['p'] : $nperiod;
 //資料分頁
 $pageSize = 19; //每頁幾條紀錄
 $rowCount = $pdo->query("select count(period) from `invoices` where period='$period'")->fetch(); //共幾條紀錄
@@ -117,7 +117,7 @@ $rows = $pdo->query($sql)->fetchall();
             </a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="#"">
+            <a class="page-link" href="#">
                 <span aria-hidden=" true" class="text-dark fas fas fa-angle-left"></span>
             </a>
         </li>
@@ -152,7 +152,7 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
 <div class="overlay">
     <div class="title bg-success">
         <p class="text-white">發票對獎</p>
-        <a href="?do=invoice_list"><i class="fas fa-times"></i></a>
+        <a href="?do=invoice_list&y=<?=$year;?>&p=<?=$period;?>"><i class="fas fa-times"></i></a>
     </div>
     <div class="edit text-center">
         <div class="mainedit mb-2">
@@ -231,7 +231,7 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
             ?>
         </div>
         <div class="text-center mt-2">
-            <a href="?do=invoice_list">
+            <a href="?do=invoice_list&y=<?=$year;?>&p=<?=$period;?>">
                 <button class="btn-success">確認</button>
             </a>
             <div>

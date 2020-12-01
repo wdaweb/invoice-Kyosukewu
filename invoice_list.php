@@ -28,16 +28,31 @@ $rows = $pdo->query($sql)->fetchall(PDO::FETCH_ASSOC);
 // foreach($rows as $row){
 //     echo $row['code']."-".$row['number']."<br>";
 // }
+$preYear = $year;
+$prePeriod = $period - 1;
+$nextYear = $year;
+$nextPeriod = $period + 1;
 
+
+if ($prePeriod < 1) {
+    $preYear = $year - 1;
+    $prePeriod = 6;
+}
+
+
+if ($nextPeriod > 6) {
+    $nextYear = $year + 1;
+    $nextPeriod = 1;
+}
 ?>
 <div class="rightPage h-100 d-flex flex-column justify-content-between">
     <div class="path">
         <div class="pagination pagination-sm justify-content-center align-items-end mt-lg-2">
-            <!-- <li class="page-item">
-                <a class="page-link" href="?do=check_invoices&y=<?= $year ?>&p=<?= $period - 1; ?>">
+            <li class="page-item">
+                <a class="page-link" href="?do=check_invoices&y=<?= $preYear ?>&p=<?= $prePeriod; ?>">
                     <span aria-hidden="true" class="text-dark fas fas fa-angle-left"></span>
                 </a>
-            </li> -->
+            </li>
             <li class="page-item">
                 <form class="d-flex" action="check_invoices.php" method="get">
                     <select name="y" onchange="submit();" class="form-select form-select-sm text-dark">
@@ -66,11 +81,11 @@ $rows = $pdo->query($sql)->fetchall(PDO::FETCH_ASSOC);
                     </select>
                 </form>
             </li>
-            <!-- <li class="page-item">
-                <a class="page-link" href="?do=check_invoices&y=<?= $year ?>&p=<?= $period + 1; ?>">
+            <li class="page-item">
+                <a class="page-link" href="?do=check_invoices&y=<?= $nextYear ?>&p=<?= $nextPeriod; ?>">
                     <span aria-hidden="true" class="text-dark fas fa-angle-right"></span>
                 </a>
-            </li> -->
+            </li>
         </div>
     </div>
     <div class="inv">
@@ -103,33 +118,33 @@ $rows = $pdo->query($sql)->fetchall(PDO::FETCH_ASSOC);
                     <div class="t2 text-center  text-secondary"><?= $row['date'] ?></div>
                     <div class="t3 text-center"><?= $row['payment'] ?></div>
                     <div class="t4 text-center d-none d-md-block">
-                        <a href="?do=edit_invoice&id=<?= $row['id']; ?>">
+                        <a href="?do=edit_invoice&id=<?= $row['id']; ?>&y=<?= $year; ?>&p=<?= $period; ?>">
                             <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-outline-warning">
                                 <p class="far fa-edit"></p>
                             </button>
                         </a>
-                        <a href="?do=del_invioce&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="刪除" class="btn btn-sm btn-outline-danger">
+                        <a href="?do=del_invioce&id=<?= $row['id']; ?>&y=<?= $year; ?>&p=<?= $period; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="刪除" class="btn btn-sm btn-outline-danger">
                                 <p class="fas fa-trash-alt"></p>
                             </button>
                         </a>
-                        <a href="?do=award&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="對獎" class="btn btn-sm btn-outline-success">
+                        <a href="?do=award&id=<?= $row['id']; ?>&y=<?= $year; ?>&p=<?= $period; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="對獎" class="btn btn-sm btn-outline-success">
                                 <p class="fas fa-medal"></p>
                             </button>
                         </a>
                     </div>
                     <div class="t5 text-center d-flex align-items-center d-md-none w-100 mb-3">
                         <div class="contral w-100 text-right mt-1 mr-4">
-                            <a href="?do=edit_invoice&id=<?= $row['id']; ?>">
+                            <a href="?do=edit_invoice&id=<?= $row['id']; ?>&y=<?= $year; ?>&p=<?= $period; ?>">
                                 <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-outline-warning">
                                     <span class="far fa-edit"></span><span> 編輯</span>
                                 </button>
                             </a>
-                            <a href="?do=del_invioce&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="刪除" class="btn btn-sm btn-outline-danger">
+                            <a href="?do=del_invioce&id=<?= $row['id']; ?>&y=<?= $year; ?>&p=<?= $period; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="刪除" class="btn btn-sm btn-outline-danger">
                                     <span class="fas fa-trash-alt"></span><span> 刪除
                                     </span>
                                 </button>
                             </a>
-                            <a href="?do=award&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="對獎" class="btn btn-sm btn-outline-success">
+                            <a href="?do=award&id=<?= $row['id']; ?>&y=<?= $year; ?>&p=<?= $period; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="對獎" class="btn btn-sm btn-outline-success">
                                     <span class="fas fa-medal"></span><span> 對獎
                                     </span>
                                 </button>

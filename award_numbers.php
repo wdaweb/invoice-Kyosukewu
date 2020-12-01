@@ -27,16 +27,6 @@ foreach ($awards as $aw) {
     }
 }
 
-
-
-if ($_GET['p'] <= 1) {
-    $y = $year - 1;
-    $i = 6;
-}
-if ($_GET['p'] >= 6) {
-    $y = $year + 1;
-    $i = 1;
-}
 ?>
 <div class="row h-100">
     <div class="path">
