@@ -3,8 +3,8 @@ include_once("base.php");
 $get_new = $pdo->query("select * from `award_numbers` order by year desc,period desc limit 1")->fetch();
 $nyear = $get_new['year'];
 $nperiod = $get_new['period'];
-$year =  !empty($_GET['pd']) ? explode("-", $_GET['pd'])[0] : $nyear;
-$period = !empty($_GET['pd']) ? explode("-", $_GET['pd'])[1] : $nperiod;
+$year =  !empty($_GET['y']) ? $_GET['y'] : $nyear;
+$period = !empty($_GET['p']) ? $_GET['p'] : $nperiod;
 $awards = $pdo->query("select * from award_numbers where year='$year' && period='$period'")->fetchALL();
 $special = "";
 $grand = "";
@@ -26,18 +26,23 @@ foreach ($awards as $aw) {
             break;
     }
 }
-if ($period < 1) {
-    $year = $year - 1;
+
+
+
+if ($_GET['p'] <= 1) {
+    $y = $year - 1;
+    $i = 6;
 }
-if ($period > 6) {
-    $year = $year + 1;
+if ($_GET['p'] >= 6) {
+    $y = $year + 1;
+    $i = 1;
 }
 ?>
 <div class="row h-100">
     <div class="path">
         <div class="pagination pagination-sm justify-content-center align-items-end mt-lg-2">
             <li class="page-item">
-                <a class="page-link" href="?do=api/check_awards&pd=<?=$year?>-<?= $period - 1; ?>">
+                <a class="page-link" href="?do=api/check_awards&y=<?=$year?>&p=<?= $period - 1; ?>">
                     <span aria-hidden="true" class="text-dark fas fas fa-angle-left"></span>
                 </a>
             </li>
@@ -56,13 +61,13 @@ if ($period > 6) {
                         }
                         ?>
                     </select>
-                    <select name="pd" onchange="submit();" class="form-select form-select-sm text-dark">
+                    <select name="p" onchange="submit();" class="form-select form-select-sm text-dark">
                         <?php
                         for ($i = 1; $i < 7; $i++) {
                             if($i==$period){
-                                echo "<option value='2020-$i' selected>";
+                                echo "<option value='$i' selected>";
                             }else{
-                                echo "<option value='2020-$i'>";
+                                echo "<option value='$i'>";
                             }
                             echo "$month[$i]" . "</option>";
                         }
@@ -71,7 +76,7 @@ if ($period > 6) {
                 </form>
             </li>
             <li class="page-item">
-                <a class="page-link" href="?do=api/check_awards&pd=<?=$year?>-<?= $period + 1; ?>">
+                <a class="page-link" href="?do=api/check_awards&&y=<?=$year?>&p=<?= $period + 1; ?>">
                     <span aria-hidden="true" class="text-dark fas fa-angle-right"></span>
                 </a>
             </li>
