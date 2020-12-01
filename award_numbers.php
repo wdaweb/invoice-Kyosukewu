@@ -72,6 +72,15 @@ foreach ($awards as $aw) {
             </li>
         </div>
     </div>
+    <?php
+    if (!empty($_GET['aemp'])) {
+    ?>
+        <div class="alert alert-danger alert-dismissible fade show text-center position-absolute top-50" role="alert">本期發票尚未開獎，敬請期待！
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php
+    }
+    ?>
     <div class="table-container">
         <table class="table table-sm col-12">
             <tbody>
