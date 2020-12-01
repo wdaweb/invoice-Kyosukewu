@@ -66,7 +66,7 @@ foreach ($awards as $aw) {
                 </form>
             </li>
             <li class="page-item">
-                <a class="page-link" href="?do=api/check_awards&&y=<?=$year?>&p=<?= $period + 1; ?>">
+                <a class="page-link" href="?do=api/check_awards&y=<?=$year?>&p=<?= $period + 1; ?>">
                     <span aria-hidden="true" class="text-dark fas fa-angle-right"></span>
                 </a>
             </li>
@@ -176,7 +176,7 @@ foreach ($awards as $aw) {
         </table>
     </div>
     <div class="aw text-center">
-        <a href="?do=all_awards&year=<?= $year ?>&period=<?= $period ?>">
+        <a href="?do=all_awards&y=<?= $year ?>&p=<?= $period ?>">
             <button class="btn btn-outline-success">對獎</button></a>
     </div>
 </div>

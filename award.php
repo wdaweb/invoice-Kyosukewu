@@ -152,7 +152,7 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
 <div class="overlay">
     <div class="title bg-success">
         <p class="text-white">發票對獎</p>
-        <a href="?do=invoice_list&y=<?=$year;?>&p=<?=$period;?>"><i class="fas fa-times"></i></a>
+        <a href="?do=invoice_list&y=<?= $year; ?>&p=<?= $period; ?>"><i class="fas fa-times"></i></a>
     </div>
     <div class="edit text-center">
         <div class="mainedit mb-2">
@@ -183,7 +183,7 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
             $year = explode('-', $date)[0];
             $period = ceil(explode('-', $date)[1] / 2);
             $awards = $pdo->query("select * from award_numbers where year='$year' && period='$period'")->fetchALL();
-            
+
             $all_res = -1;
             foreach ($awards as $award) {
                 switch ($award['type']) {
@@ -231,7 +231,7 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
             ?>
         </div>
         <div class="text-center mt-2">
-            <a href="?do=invoice_list&y=<?=$year;?>&p=<?=$period;?>">
+            <a href="?do=invoice_list&y=<?= $year; ?>&p=<?= $period; ?>">
                 <button class="btn-success">確認</button>
             </a>
             <div>
