@@ -1,5 +1,4 @@
 
-  
   body {
     width: 100vw;
     height: 100vh;
@@ -79,11 +78,13 @@
     border-radius: 5px 5px 0 0;
   }
 
+  .p0-2:hover,
   .p4:hover,
   .p5:hover {
     transform: scaleY(1.3) perspective(1em) rotateX(-3deg);
   }
 
+  .p0:hover,
   .p1:hover,
   .p2:hover,
   .p3:hover {
@@ -242,7 +243,7 @@
   .edit {
     width: 95vw;
     height: 25vh;
-    background: rgba(255, 255, 255, .6);
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(2px);
     border-radius: 0 0 1rem 1rem;
     box-shadow: 5px 5px 10px #333;
@@ -291,7 +292,8 @@
   .i2 {
     width: 75%;
   }
-  .i3{
+
+  .i3 {
     width: 100%;
   }
 
@@ -358,19 +360,30 @@
       background: url(https://i.postimg.cc/8CP4mv8n/right-bg.jpg);
       background-size: cover;
     }
-    .edit,.title{
+
+    .edit,
+    .title {
       width: 60vw;
     }
   }
 
   @media screen and (min-width: 768px) {
+
     .p0,
-  .p1,
-  .p2,
-  .p3 {
-    align-items: center;
-    border-radius:5px 5px 0 0;
-  }
+    .p1,
+    .p2,
+    .p3 {
+      align-items: center;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .p0:hover,
+    .p1:hover,
+    .p2:hover,
+    .p3:hover {
+      transform: scaleY(1.3) perspective(1em) rotateX(-3deg);
+    }
+
     .ll {
       width: 30%;
     }
@@ -396,13 +409,17 @@
     .bg4 {
       bottom: 0;
     }
-    .edit,.title{
+
+    .edit,
+    .title {
       width: 50vw;
     }
-    .edit{
+
+    .edit {
       height: 30vh;
     }
   }
+
   @media screen and (min-width: 992px) {
     .t1 {
       width: 30%;
@@ -448,18 +465,21 @@
       border-radius: 0 5px 5px 0;
     }
 
+    .p0:hover,
     .p1:hover,
     .p2:hover,
     .p3:hover {
       transform: matrix(0.8, -0.25, 0, 1, 0, -10);
     }
 
+    .p0-2,
     .p4,
     .p5 {
       justify-content: flex-start;
       border-radius: 5px 0 0 5px;
     }
 
+    .p0-2:hover,
     .p4:hover,
     .p5:hover {
       transform: matrix(0.8, 0.25, 0, 1, 0, -10);
@@ -526,10 +546,13 @@
       bottom: 0;
       left: -50%;
     }
-    .edit,.title{
+
+    .edit,
+    .title {
       width: 35vw;
     }
-    .edit{
+
+    .edit {
       height: 20vh;
     }
   }
@@ -562,18 +585,21 @@
       border-radius: 0 5px 5px 0;
     }
 
+    .p0:hover,
     .p1:hover,
     .p2:hover,
     .p3:hover {
       transform: matrix(0.8, -0.25, 0, 1, 0, -10);
     }
 
+    .p0-2,
     .p4,
     .p5 {
       justify-content: flex-start;
       border-radius: 5px 0 0 5px;
     }
 
+    .p0-2:hover,
     .p4:hover,
     .p5:hover {
       transform: matrix(0.8, 0.25, 0, 1, 0, -10);
@@ -584,7 +610,9 @@
       background: url(https://i.postimg.cc/D0VLb3fc/bgbook.png) no-repeat center center;
       background-size: 100% 100%;
     }
-    .edit,.title{
+
+    .edit,
+    .title {
       width: 25vw;
     }
   }
@@ -614,7 +642,6 @@
       top: -20%;
       right: 0%;
     }
-
 
     .bg4 {
       bottom: -5%;
