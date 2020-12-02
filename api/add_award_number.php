@@ -3,15 +3,24 @@
 //撰寫建立各期中獎號碼的程式
 //將表單傳送過來的中獎號碼寫入資料庫
 include_once("../base.php");// once 只要一份
+$_SESSION['err']=[];
 // foreach($_POST as $key =>$value){
 //     $tmp[]=$key;
 // }
 // foreach($_POST as $key =>$value){
 //     $tmp2[]=$value;
 // }
-echo "<pre>";
-print_r(array_keys($_POST));
-echo "</pre>";
+accept('special_prize','此欄位必填');
+length('special_prize',8,8,'開獎號碼為8位數字');
+accept('grand_prize','此欄位必填');
+length('grand_prize',8,8,'開獎號碼為8位數字');
+// accept('first_prize[]','此欄位必填');
+// length('first_prize[]',8,8,'開獎號碼為8位數字');
+
+// echo "<pre>";
+// print_r(array_keys($_POST));
+// echo "</pre>";
+if(empty($_SESSION['err'])){
 
 $year=$_POST['year'];
 $period=$_POST['period'];
@@ -59,5 +68,10 @@ foreach($_POST['add_prize'] as $six){
 
 // echo "新增完成";
 // header("location:../index.php?do=award_numbers&pd=".$year."-".$period);
-to("../index.php?do=award_numbers&pd='.$year.'-'.$period");
-?>
+// to("../index.php?do=award_numbers&y=$year&p=$period");
+
+header("location:../index.php?do=award_numbers&y=$year&p=$period");
+
+}else{
+    header("location:../index.php?in=add_awards");
+}
