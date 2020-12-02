@@ -186,6 +186,16 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
 
             $all_res = -1;
             $aw="";
+            $abonus=[
+                "特別獎"=>10000000,
+                "特獎"=>2000000,
+                "頭獎"=>200000,
+                "貳獎"=>40000,
+                "參獎"=>10000,
+                "肆獎"=>4000,
+                "伍獎"=>1000,
+                "陸獎"=>200,
+            ];
             foreach ($awards as $award) {
                 switch ($award['type']) {
                     case 1: //特別號
@@ -193,6 +203,7 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
                             echo "<div class='h3 text-danger'>中大獎啦！<br>特別獎-獎金壹千萬！！</div>";
                             $all_res = 1;
                             $aw="特別獎";
+                            $bonus=$abonus[$aw];
                         }
                         break;
                     case 2: //特獎
@@ -200,6 +211,7 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
                             echo "<div class='h3 text-danger'>中大獎啦！<br>特獎-獎金貳佰萬！！</div>";
                             $all_res = 1;
                             $aw="特獎";
+                            $bonus=$abonus[$aw];
                         }
                         break;
                     case 3: //頭獎
@@ -219,6 +231,7 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
                             echo "<div class='h3 text-danger'>中獎啦！<br>中了{$awardStr[$res]}獎啦~";
                             $all_res = 1;
                             $aw="{$awardStr[$res]}獎";
+                            $bonus=$abonus[$aw];
                         }
                         break;
                     case 4: //增開六獎
@@ -226,6 +239,7 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
                             echo "<div class='h3 text-danger'>中獎啦！<br>增開陸獎-獎金貳佰元</div>";
                             $all_res = 1;
                             $aw="陸獎";
+                            $bonus=$abonus[$aw];
                         }
                         break;
                 }
@@ -236,11 +250,11 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
 
             // insert into invoices (`date`,`period`,`code`,`number`,`payment`) values('2020-12-02','1','SG','0267817448','40')
 
-            $check=$pdo->query("select * from `reward_record` where inid='$inv_id'")->fetch();
+            $check=$pdo->query("select * from `reward_record` where id='$inv_id'")->fetch();
             //資料寫入
             if($all_res>=0){
                 if(empty($check)){
-                    $sql="insert into `reward_record` (`inid`,`number`,`period`,`reward`,`payment`,`date`,`code`,`user_id`) values ('{$invoice['id']}','{$invoice['number']}','{$invoice['period']}','$aw','{$invoice['payment']}','{$invoice['date']}','{$invoice['code']}','{$invoice['user_id']}')";
+                    $sql="insert into `reward_record` (`inid`,`user_id`,`code`,`number`,`period`,`payment`,`date`,`reward`,`bonus`) values ('{$invoice['id']}','{$invoice['user_id']}','{$invoice['code']}','{$invoice['number']}','{$invoice['period']}','{$invoice['payment']}','{$invoice['date']}','$aw','$bonus')";
                     $pdo->exec($sql);
                 }
             }
