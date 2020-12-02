@@ -23,6 +23,7 @@ accept('number','發票號碼的欄位必填');
 accept('payment','發票金額的欄位必填');
 
 
+
 // $sql="insert into invoices (`".implode("`,`",array_keys($_POST))."`) values('".implode("','",$_POST)."')";
 
 save('invoices',$_POST);
