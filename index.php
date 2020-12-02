@@ -12,7 +12,7 @@ include_once("base.php")
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a1381bb91e.js" crossorigin="anonymous"></script>
-  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <link rel="stylesheet" href="css/style.css">
   <title>統一發票紀錄及對獎系統</title>
 </head>
 <body>

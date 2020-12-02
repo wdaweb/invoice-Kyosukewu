@@ -252,12 +252,10 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
 
             $check=$pdo->query("select * from `reward_record` where id='$inv_id'")->fetch();
             //資料寫入
-            if($all_res>=0){
-                if(empty($check)){
+            if($all_res>=0 && empty($check)){
                     $sql="insert into `reward_record` (`inid`,`user_id`,`code`,`number`,`period`,`payment`,`date`,`reward`,`bonus`) values ('{$invoice['id']}','{$invoice['user_id']}','{$invoice['code']}','{$invoice['number']}','{$invoice['period']}','{$invoice['payment']}','{$invoice['date']}','$aw','$bonus')";
                     $pdo->exec($sql);
                 }
-            }
 
             ?>
         </div>

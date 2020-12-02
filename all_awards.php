@@ -201,27 +201,32 @@ $period_str = [
         </div>
         <div class="h-100 overflow-auto">開獎結果：
             <?php
-            // echo $_GET['y']."年";
-            // echo $period_str[$_GET['p']]."單期發票對獎，";
             //撈出該期發票
             $sql = "select * from `invoices` where left(date,4)='{$_GET['y']}' && period='{$_GET['p']}' Order by date";
             $invoices = $pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
-
-
+            
             //撈出該期獎號
-
             $sql = "select * from `award_numbers` where year='{$_GET['y']}' && period='{$_GET['p']}'Order by type";
-            $award_numbers = $pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC); //PDO::FETCH_ASSOC 以欄位的方式取得資料
-
+            $award_numbers = $pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+            //PDO::FETCH_ASSOC 以欄位的方式取得資料
             //PDO::FETCH_NUM 取索引
-
 
             //開始對獎
             $all_res = -1;
             $count_res = 0;
             $count_award = 0;
+            $aw = "";
+            $abonus = [
+                "特別獎" => 10000000,
+                "特獎" => 2000000,
+                "頭獎" => 200000,
+                "貳獎" => 40000,
+                "參獎" => 10000,
+                "肆獎" => 4000,
+                "伍獎" => 1000,
+                "陸獎" => 200,
+            ];
             foreach ($invoices as $inv) {
-
                 $number = $inv['number'];
                 $date = $inv['date'];
                 foreach ($award_numbers as $award) {
@@ -233,6 +238,8 @@ $period_str = [
                                 $all_res = 1;
                                 $count_res = $count_res + 1;
                                 $count_award = $count_award + 10000000;
+                                $aw = "特別獎";
+                                $bonus = $abonus[$aw];
                             }
                             break;
                         case 2: //特獎          
@@ -242,6 +249,8 @@ $period_str = [
                                 $all_res = 1;
                                 $count_res = $count_res + 1;
                                 $count_award = $count_award + 2000000;
+                                $aw = "特獎";
+                                $bonus = $abonus[$aw];
                             }
                             break;
                         case 3: //頭獎
@@ -261,7 +270,10 @@ $period_str = [
                                 echo "<br>發票號碼：" . $number . "<br>";
                                 echo "中了{$awardStr[$res]}獎<br>";
                                 $all_res = 1;
+                                $aw = "{$awardStr[$res]}獎";
+                                $bonus = $abonus[$aw];
                                 $count_res = $count_res + 1;
+                                
                                 switch ($awardStr[$res]) {
                                     case "頭":
                                         $count_award = $count_award + 200000;
@@ -290,6 +302,8 @@ $period_str = [
                                 $all_res = 1;
                                 $count_res = $count_res + 1;
                                 $count_award = $count_award + 200;
+                                $aw = "陸獎";
+                                $bonus = $abonus[$aw];
                                 echo "中了增開六獎<br>";
                             }
                             break;
@@ -301,8 +315,25 @@ $period_str = [
             }
             echo "<br>總計" . count($invoices) . "張發票<br>";
             echo "中獎<span class='text-danger'>" . $count_res . "</span>張發票，共計獎金<span class='text-danger'>" . $count_award . "</span>元";
-            ?>
+            
+            print_r($rewards);
 
+            // foreach($reward_id as $re_id){
+            //      $invoice[]=$pdo->query("select * from `invoices` where id='$re_id'")->fetch();
+            // }
+            // print_r($invoice);
+            foreach($reward_id as $re_id){
+                $checkAll[]=$pdo->query("select * from `reward_record` where id='$re_id'")->fetch();
+            }
+
+            if($all_res>=0){
+                foreach($invoice as $inv){
+                    $sql="insert into `reward_record` (`inid`,`user_id`,`code`,`number`,`period`,`payment`,`date`,`reward`,`bonus`) values ('v['id']}','{$inv['user_id']}','{$inv['code']}','{$inv['number']}','{$inv['period']}','{$inv['payment']}','{$inv['date']}','$aw','$bonus')";
+                    // $pdo->exec($sql);
+                }
+            }
+
+            ?>
         </div>
         <div class="text-center mt-2">
             <a href="?do=award_numbers&y=<?= $year; ?>&p=<?= $period; ?>">
