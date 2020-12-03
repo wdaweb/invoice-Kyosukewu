@@ -196,7 +196,7 @@ $period_str = [
         <p class="text-white"><?= $year . "年，" . $period_str[$_GET['p']] . "發票對獎" ?></p>
         <a href="?do=award_numbers&y=<?= $year; ?>&p=<?= $period; ?>"><i class="fas fa-times"></i></a>
     </div>
-    <div class="edit text-center">
+    <div class="edit text-center h-100">
         <div class="mainedit">
         </div>
         <div class="h-100 overflow-auto">開獎結果：
@@ -240,6 +240,10 @@ $period_str = [
                                 $count_award = $count_award + 10000000;
                                 $aw = "特別獎";
                                 $bonus = $abonus[$aw];
+                                $reinv=$pdo->query("select * from invoices where id='{$inv['id']}'")->fetch(PDO::FETCH_ASSOC);
+                                array_push($reinv,$aw,$bonus);
+                                $reinvs[]=$reinv;
+                                // print_r($reinvs);
                             }
                             break;
                         case 2: //特獎          
@@ -251,6 +255,10 @@ $period_str = [
                                 $count_award = $count_award + 2000000;
                                 $aw = "特獎";
                                 $bonus = $abonus[$aw];
+                                $reinv=$pdo->query("select * from invoices where id='{$inv['id']}'")->fetch(PDO::FETCH_ASSOC);
+                                array_push($reinv,$aw,$bonus);
+                                $reinvs[]=$reinv;
+                                // print_r($reinvs);
                             }
                             break;
                         case 3: //頭獎
@@ -272,6 +280,10 @@ $period_str = [
                                 $all_res = 1;
                                 $aw = "{$awardStr[$res]}獎";
                                 $bonus = $abonus[$aw];
+                                $reinv=$pdo->query("select * from invoices where id='{$inv['id']}'")->fetch(PDO::FETCH_ASSOC);
+                                array_push($reinv,$aw,$bonus);
+                                $reinvs[]=$reinv;
+                                // print_r($reinvs);
                                 $count_res = $count_res + 1;
                                 
                                 switch ($awardStr[$res]) {
@@ -304,6 +316,10 @@ $period_str = [
                                 $count_award = $count_award + 200;
                                 $aw = "陸獎";
                                 $bonus = $abonus[$aw];
+                                $reinv=$pdo->query("select * from invoices where id='{$inv['id']}'")->fetch(PDO::FETCH_ASSOC);
+                                array_push($reinv,$aw,$bonus);
+                                $reinvs[]=$reinv;
+                                // print_r($reinvs);
                                 echo "中了增開六獎<br>";
                             }
                             break;
@@ -316,23 +332,15 @@ $period_str = [
             echo "<br>總計" . count($invoices) . "張發票<br>";
             echo "中獎<span class='text-danger'>" . $count_res . "</span>張發票，共計獎金<span class='text-danger'>" . $count_award . "</span>元";
             
-            print_r($rewards);
-
-            // foreach($reward_id as $re_id){
-            //      $invoice[]=$pdo->query("select * from `invoices` where id='$re_id'")->fetch();
-            // }
-            // print_r($invoice);
-            foreach($reward_id as $re_id){
-                $checkAll[]=$pdo->query("select * from `reward_record` where id='$re_id'")->fetch();
-            }
-
-            if($all_res>=0){
-                foreach($invoice as $inv){
-                    $sql="insert into `reward_record` (`inid`,`user_id`,`code`,`number`,`period`,`payment`,`date`,`reward`,`bonus`) values ('v['id']}','{$inv['user_id']}','{$inv['code']}','{$inv['number']}','{$inv['period']}','{$inv['payment']}','{$inv['date']}','$aw','$bonus')";
-                    // $pdo->exec($sql);
+            if($all_res >= 0){
+            foreach($reinvs as $reinv){
+                $check=$pdo->query("select * from `reward_record` where inid='{$reinv['id']}'")->fetch();
+                if(empty($check)){
+                    $sql="insert into `reward_record` (`inid`,`user_id`,`code`,`number`,`period`,`payment`,`date`,`reward`,`bonus`) values ('{$reinv['id']}','{$reinv['user_id']}','{$reinv['code']}','{$reinv['number']}','{$reinv['period']}','{$reinv['payment']}','{$reinv['date']}','{$reinv['0']}','{$reinv['1']}')";
+                    $pdo->exec($sql);
                 }
             }
-
+        }
             ?>
         </div>
         <div class="text-center mt-2">
