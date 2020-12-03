@@ -240,6 +240,9 @@ $period_str = [
                                 $count_award = $count_award + 10000000;
                                 $aw = "特別獎";
                                 $bonus = $abonus[$aw];
+                                $reward=$pdo->query("select * from invoices where id='{$inv['id']}'")->fetchALL();
+                                array_push($reward,$aw,$bonus);
+                                $allReward[]=$reward;
                             }
                             break;
                         case 2: //特獎          
@@ -251,6 +254,9 @@ $period_str = [
                                 $count_award = $count_award + 2000000;
                                 $aw = "特獎";
                                 $bonus = $abonus[$aw];
+                                $reward=$pdo->query("select * from invoices where id='{$inv['id']}'")->fetchALL();
+                                array_push($reward,$aw,$bonus);
+                                $allReward[]=$reward;
                             }
                             break;
                         case 3: //頭獎
@@ -304,6 +310,9 @@ $period_str = [
                                 $count_award = $count_award + 200;
                                 $aw = "陸獎";
                                 $bonus = $abonus[$aw];
+                                $reward=$pdo->query("select * from invoices where id='{$inv['id']}'")->fetchALL();
+                                array_push($reward,$aw,$bonus);
+                                $allReward[]=$reward;
                                 echo "中了增開六獎<br>";
                             }
                             break;
@@ -316,22 +325,22 @@ $period_str = [
             echo "<br>總計" . count($invoices) . "張發票<br>";
             echo "中獎<span class='text-danger'>" . $count_res . "</span>張發票，共計獎金<span class='text-danger'>" . $count_award . "</span>元";
             
-            print_r($rewards);
+            print_r($allReward);
 
             // foreach($reward_id as $re_id){
             //      $invoice[]=$pdo->query("select * from `invoices` where id='$re_id'")->fetch();
             // }
             // print_r($invoice);
-            foreach($reward_id as $re_id){
-                $checkAll[]=$pdo->query("select * from `reward_record` where id='$re_id'")->fetch();
-            }
+            // foreach($reward_id as $re_id){
+            //     $checkAll[]=$pdo->query("select * from `reward_record` where id='$re_id'")->fetch();
+            // }
 
-            if($all_res>=0){
-                foreach($invoice as $inv){
-                    $sql="insert into `reward_record` (`inid`,`user_id`,`code`,`number`,`period`,`payment`,`date`,`reward`,`bonus`) values ('v['id']}','{$inv['user_id']}','{$inv['code']}','{$inv['number']}','{$inv['period']}','{$inv['payment']}','{$inv['date']}','$aw','$bonus')";
-                    // $pdo->exec($sql);
-                }
-            }
+            // if($all_res>=0){
+            //     foreach($invoice as $inv){
+            //         $sql="insert into `reward_record` (`inid`,`user_id`,`code`,`number`,`period`,`payment`,`date`,`reward`,`bonus`) values ('v['id']}','{$inv['user_id']}','{$inv['code']}','{$inv['number']}','{$inv['period']}','{$inv['payment']}','{$inv['date']}','$aw','$bonus')";
+            //         // $pdo->exec($sql);
+            //     }
+            // }
 
             ?>
         </div>
