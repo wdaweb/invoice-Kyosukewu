@@ -17,11 +17,10 @@ $row['number']=$_POST['number'];
 $row['date']=$_POST['date'];
 $row['payment']=$_POST['payment'];
 
-echo save('invoices',$row);
+save('invoices',$row);
 
-
-// $pdo->exec($sql);
+$pdo->exec($sql);
 
 // header("location:../index.php?do=invoice_list");
-to("../index.php?do=invoice_list");
+to("../index.php?do=invoice_list&y={$_POST['y']}&p={$_POST['p']}");
 ?>

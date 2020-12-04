@@ -1,11 +1,9 @@
 <?php
 include_once("base.php");
 //期別查詢
-$get_new = $pdo->query("select * from `award_numbers` order by year desc,period desc limit 1")->fetch();
-$nyear = $get_new['year'];
-$nperiod = $get_new['period'];
-$year =  !empty($_GET['p']) ? $_GET['p'] : $nyear;
-$period = !empty($_GET['p']) ? $_GET['p'] : $nperiod;
+
+$year =  $_GET['y'];
+$period = $_GET['p'];
 //資料分頁
 $pageSize = 19; //每頁幾條紀錄
 $rowCount = $pdo->query("select count(period) from `invoices` where period='$period'")->fetch(); //共幾條紀錄
@@ -20,7 +18,7 @@ $rows = $pdo->query($sql)->fetchall();
 
 ?>
 <div class="rightPage h-100 d-flex flex-column justify-content-between">
-<div class="path">
+    <div class="path">
         <div class="pagination pagination-sm justify-content-center align-items-end mt-lg-2">
             <li class="page-item">
                 <a class="page-link" href="#">
@@ -117,7 +115,7 @@ $rows = $pdo->query($sql)->fetchall();
             </a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="#"">
+            <a class="page-link" href="#">
                 <span aria-hidden="true" class="text-dark fas fas fa-angle-left"></span>
             </a>
         </li>
@@ -145,112 +143,14 @@ $rows = $pdo->query($sql)->fetchall();
         </li>
     </div>
 </div>
-    <div class="inv">
-        <div class="tit d-flex w-100 py-2 mb-3 border-top">
-            <div class="t1 text-center">發票號碼</div>
-            <div class="t2 text-center">消費日期</div>
-            <div class="t3 text-center">金額</div>
-            <div class="t4 text-center d-none d-md-block">操作</div>
-        </div>
-        <div class="invoices w-100">
-            <?php
-            foreach ($rows as $row) {
-            ?>
-                <div class="invoice d-flex flex-wrap">
-                    <div class="t1 text-center"><?= $row['code'] . "-" . $row['number'] ?></div>
-                    <div class="t2 text-center  text-secondary"><?= $row['date'] ?></div>
-                    <div class="t3 text-center"><?= $row['payment'] ?></div>
-                    <div class="t4 text-center d-none d-md-block">
-                        <a href="?do=edit_invoice&id=<?= $row['id']; ?>">
-                            <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-outline-warning">
-                                <p class="far fa-edit"></p>
-                            </button>
-                        </a>
-                        <a href="?do=del_invioce&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="刪除" class="btn btn-sm btn-outline-danger">
-                                <p class="fas fa-trash-alt"></p>
-                            </button>
-                        </a>
-                        <a href="?do=award&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="對獎" class="btn btn-sm btn-outline-success">
-                                <p class="fas fa-medal"></p>
-                            </button>
-                        </a>
-                    </div>
-                    <div class="t5 text-center d-flex align-items-center d-md-none w-100 mb-3">
-                        <div class="contral w-100 text-right mt-1 mr-4">
-                            <a href="?do=edit_invoice&id=<?= $row['id']; ?>">
-                                <button type="button" data-toggle="tooltip" data-placement="top" title="編輯" class="btn btn-sm btn-outline-warning">
-                                    <span class="far fa-edit"></span><span> 編輯</span>
-                                </button>
-                            </a>
-                            <a href="?do=del_invioce&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="刪除" class="btn btn-sm btn-outline-danger">
-                                    <span class="fas fa-trash-alt"></span><span> 刪除
-                                    </span>
-                                </button>
-                            </a>
-                            <a href="?do=award&id=<?= $row['id']; ?>"><button type="button" data-toggle="tooltip" data-placement="top" title="對獎" class="btn btn-sm btn-outline-success">
-                                    <span class="fas fa-medal"></span><span> 對獎
-                                    </span>
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            <?php
-            }
-            ?>
-        </div>
-    </div>
-    <?php
-    $prePage = $pageNow - 1;
 
-    if ($pageNow < $pageCount) {
-        $nextPage = $pageNow + 1;
-    } else {
-        $nextPage = $pageCount;
-    }
-    ?>
-    <div class="page pagination pagination-sm justify-content-center align-items-end mb-0 mb-md-2 mt-lg-2">
-        <li class="page-item">
-            <a class="page-link" href="?pageNow=<?= $pageNow = 1; ?>&p=<?= $period; ?>" aria-label="Previous">
-                <span aria-hidden="true" class="text-dark fas fa-angle-double-left"></span>
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="?pageNow=<?= $prePage; ?>&p=<?= $period; ?>" aria-label="Previous">
-                <span aria-hidden="true" class="text-dark fas fas fa-angle-left"></span>
-            </a>
-        </li>
-        <li class="page-item">
-            <form action="index.php" method="get">
-                <input type="hidden" name="p" value="<?= $period ?>">
-                <select name="pageNow" onchange="submit();" class="form-select form-select-sm text-dark">
-                    <?php
-                    for ($i = 1; $i <= $pageCount; $i++) {
-                        echo "<option value='$i'>Page-" . $i . "</option>";
-                    }
-                    ?>
-                </select>
-            </form>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="?pageNow=<?= $nextPage; ?>&p=<?= $period; ?>" aria-label="Next">
-                <span aria-hidden="true" class="text-dark fas fa-angle-right"></span>
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="?pageNow=<?= $pageNow = $pageCount; ?>&p=<?= $period; ?>" aria-label="Next">
-                <span aria-hidden="true" class="text-dark fas fa-angle-double-right"></span>
-            </a>
-        </li>
-    </div>
-</div>
 <?php
 $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
 ?>
 <div class="overlay">
     <div class="title bg-danger">
         <p class="text-white">刪除發票</p>
-        <a href="?do=invoice_list"><i class="fas fa-times"></i></a>
+        <a href="?do=invoice_list&y=<?=$year;?>&p=<?=$period;?>"><i class="fas fa-times"></i></a>
     </div>
     <div class="edit text-center">
         <p>確定要刪除以下發票？</p>
@@ -264,11 +164,11 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
             </div>
         </div>
         <div class="text-center">
-            <a href="?do=del_invoice_check&del=1&id=<?= $_GET['id']; ?>">
+            <a href="?do=del_invoice_check&del=1&id=<?= $_GET['id']; ?>&y=<?=$year;?>&p=<?=$period;?>">
                 <!-- do=del用來區分是要帶值來刪除頁or刪除資料 -->
                 <button class="btn-danger">確認</button>
             </a>
-            <a href="?do=invoice_list">
+            <a href="?do=invoice_list&y=<?=$year;?>&p=<?=$period;?>">
                 <button class="btn-warning">取消</button>
             </a>
         <div>

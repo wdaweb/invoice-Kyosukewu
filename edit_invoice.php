@@ -1,11 +1,9 @@
 <?php
 include_once("base.php");
 //期別查詢
-$get_new = $pdo->query("select * from `award_numbers` order by year desc,period desc limit 1")->fetch();
-$nyear = $get_new['year'];
-$nperiod = $get_new['period'];
-$year =  !empty($_GET['p']) ? $_GET['p'] : $nyear;
-$period = !empty($_GET['p']) ? $_GET['p']: $nperiod;
+
+$year = $_GET['y'];
+$period = $_GET['p'];
 //資料分頁
 $pageSize = 19; //每頁幾條紀錄
 $rowCount = $pdo->query("select count(period) from `invoices` where period='$period'")->fetch(); //共幾條紀錄
@@ -153,11 +151,13 @@ $inv = $pdo->query($sql)->fetch();
 <div class="overlay">
     <div class="title bg-warning">
         <p class="text-white">編輯發票</p>
-        <a href="?do=invoice_list"><i class="fas fa-times"></i></a>
+        <a href="?do=invoice_list&y=<?=$year;?>&p=<?=$period;?>"><i class="fas fa-times"></i></a>
     </div>
     <form class="edit" action="api/update_invoice.php" method="post">
         <div class="mainedit mb-2">
             <input type="hidden" name="id" value="<?= $inv['id']; ?>">
+            <input type="hidden" name="y" value="<?= $year; ?>">
+            <input type="hidden" name="p" value="<?= $period; ?>">
             <div class="text col-12">
                 <p class="pb-3" >發票號碼：</p>
                 <p class="pb-3" >消費日期：</p>
