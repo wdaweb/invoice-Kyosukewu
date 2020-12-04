@@ -26,13 +26,28 @@ foreach ($awards as $aw) {
             break;
     }
 }
+$preYear = $year;
+$prePeriod = $period - 1;
+$nextYear = $year;
+$nextPeriod = $period + 1;
 
+
+if ($prePeriod < 1) {
+    $preYear = $year - 1;
+    $prePeriod = 6;
+}
+
+
+if ($nextPeriod > 6) {
+    $nextYear = $year + 1;
+    $nextPeriod = 1;
+}
 ?>
 <div class="row h-100">
     <div class="path">
         <div class="pagination pagination-sm justify-content-center align-items-end mt-lg-2">
             <li class="page-item">
-                <a class="page-link" href="?do=api/check_awards&y=<?=$year?>&p=<?= $period - 1; ?>">
+                <a class="page-link" href="?do=api/check_awards&y=<?=$preYear?>&p=<?= $prePeriod; ?>">
                     <span aria-hidden="true" class="text-dark fas fas fa-angle-left"></span>
                 </a>
             </li>
@@ -66,7 +81,7 @@ foreach ($awards as $aw) {
                 </form>
             </li>
             <li class="page-item">
-                <a class="page-link" href="?do=api/check_awards&y=<?=$year?>&p=<?= $period + 1; ?>">
+                <a class="page-link" href="?do=api/check_awards&y=<?=$nextYear?>&p=<?= $nextPeriod; ?>">
                     <span aria-hidden="true" class="text-dark fas fa-angle-right"></span>
                 </a>
             </li>
