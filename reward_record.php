@@ -118,7 +118,7 @@ if ($nextPeriod > 6) {
     }
     ?>
     <div class="inv">
-        <div class="total col-12 pb-2">
+        <div class="total col-12 col-md-11 mx-auto pb-2">
             <div class="col-12 d-flex justify-content-between"><span>本期發票總數：</span><span><?= $periodCount ?></span>張</div>
             <div class="col-12 d-flex justify-content-between"><span>本期中獎發票：</span><span><?= $rca; ?></span>張</div>
             <div class="col-12 d-flex justify-content-between"><span>本期中獎獎金：</span><span class="text-danger"><?= $bc; ?></span>元</div>
@@ -140,12 +140,12 @@ if ($nextPeriod > 6) {
         <?php
         }
         ?>
-        <div class="tit d-flex w-100 py-2 mb-3 border-top">
+        <div class="tit d-flex w-100 py-2 my-3 border-top">
             <div class="col-5 col-md-3 text-center">發票號碼</div>
             <div class="col-4 col-md-3 text-center">消費日期</div>
-            <div class="col-3 col-md-3 text-center">金額</div>
-            <div class="col-md-2 text-center d-none d-md-flex">獎項</div>
-            <div class="col-md-2 text-center d-none d-md-flex">獎金</div>
+            <div class="col-3 col-md-2 text-center">金額</div>
+            <div class="col-md-2 text-center d-none d-md-block">獎項</div>
+            <div class="col-md-2 text-center d-none d-md-block">獎金</div>
         </div>
         <div class="rewards">
             <?php
@@ -154,8 +154,8 @@ if ($nextPeriod > 6) {
                 <div class="reward d-flex flex-wrap">
                     <div class="col-5 col-md-3 text-center"><?= $row['code'] . "-" . $row['number'] ?></div>
                     <div class="col-4 col-md-3 text-center  text-secondary"><?= $row['date'] ?></div>
-                    <div class="col-3 col-md-3 text-center"><?= $row['payment'] ?>元</div>
-                    <div class="text-right col-4 col-md-2">-<?= $row['reward'] ?>-</div>
+                    <div class="col-3 col-md-2 text-center"><?= $row['payment'] ?>元</div>
+                    <div class="text-center col-4 col-md-2">-<?= $row['reward'] ?>-</div>
                     <div class="text-right col-4 d-block d-md-none mb-4">獎金：</div>
                     <div class="text-center col-4 col-md-2"><?= $row['bonus'] ?>元</div>
                 </div>
@@ -163,9 +163,9 @@ if ($nextPeriod > 6) {
             }
             ?>
         </div>
-        <div class="total2 col-12 pb-2">
-            <div class="col-12 d-flex justify-content-between border-top"><span>年度累計發票：</span><span><?= $inva; ?></span>張</div>
-            <div class="col-12 d-flex justify-content-between"><span>年度累計獎金：</span><span class="text-danger"><?= $bca ?></span>元</div>
+        <div class="total col-12 col-md-11 mx-auto pt-2">
+            <div class="col-12  d-flex justify-content-between border-top pt-2"><span>年度累計發票：</span><span><?= $inva; ?></span>張</div>
+            <div class="col-12  d-flex justify-content-between"><span>年度累計獎金：</span><span class="text-danger"><?= $bca ?></span>元</div>
             <div class="float-right"><small class="text-danger">(報酬率：<?= $win2; ?>%)</small></div>
         </div>
     </div>
