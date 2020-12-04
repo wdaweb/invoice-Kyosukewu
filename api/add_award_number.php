@@ -67,11 +67,11 @@ foreach($_POST['add_prize'] as $six){
 
 
 // echo "新增完成";
-// header("location:../index.php?do=award_numbers&pd=".$year."-".$period);
-// to("../index.php?do=award_numbers&y=$year&p=$period");
+// header("location:../logindex.php?do=award_numbers&pd=".$year."-".$period);
+// to("../logindex.php?do=award_numbers&y=$year&p=$period");
 
-header("location:../index.php?do=award_numbers&y=$year&p=$period");
+header("location:../logindex.php?do=award_numbers&y=$year&p=$period");
 
 }else{
-    header("location:../index.php?in=add_awards");
+    header("location:../logindex.php?in=add_awards");
 }

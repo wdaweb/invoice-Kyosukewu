@@ -21,6 +21,6 @@ save('invoices',$row);
 
 $pdo->exec($sql);
 
-// header("location:../index.php?do=invoice_list");
-to("../index.php?do=invoice_list&y={$_POST['y']}&p={$_POST['p']}");
+// header("location:../logindex.php?do=invoice_list");
+to("../logindex.php?do=invoice_list&y={$_POST['y']}&p={$_POST['p']}");
 ?>

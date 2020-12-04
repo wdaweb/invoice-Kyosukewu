@@ -52,7 +52,7 @@ if ($nextPeriod > 6) {
                 </a>
             </li>
             <li class="page-item">
-                <form class="d-flex" action="index.php" method="get">
+                <form class="d-flex" action="logindex.php" method="get">
                     <input type="hidden" name="do" value="api/check_awards">
                     <select name="y" onchange="submit();" class="form-select form-select-sm text-dark">
                         <?php

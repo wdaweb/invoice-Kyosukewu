@@ -178,7 +178,7 @@ if ($nextPeriod > 6) {
             </a>
         </li>
         <li class="page-item">
-            <form action="index.php" method="get">
+            <form action="logindex.php" method="get">
                 <input type="hidden" name="y" value="<?= $year ?>">
                 <input type="hidden" name="p" value="<?= $period ?>">
                 <select name="pageNow" onchange="submit();" class="form-select form-select-sm text-dark">

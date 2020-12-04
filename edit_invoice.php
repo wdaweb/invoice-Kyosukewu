@@ -26,7 +26,7 @@ $rows = $pdo->query($sql)->fetchall();
                 </a>
             </li>
             <li class="page-item">
-                <form class="d-flex" action="index.php" method="get">
+                <form class="d-flex" action="logindex.php" method="get">
                     <select name="y" class="form-select form-select-sm text-dark">
                         <option value="<?= $year-1 ?>"><?= $year-1 ?></option>
                         <option value="<?= $year ?>" selected><?= $year ?></option>
@@ -120,7 +120,7 @@ $rows = $pdo->query($sql)->fetchall();
             </a>
         </li>
         <li class="page-item">
-            <form action="index.php" method="get">
+            <form action="logindex.php" method="get">
                 <input type="hidden" name="p" value="<?= $period ?>">
                 <select name="pageNow" class="form-select form-select-sm text-dark">
                     <?php

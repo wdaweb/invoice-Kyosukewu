@@ -33,9 +33,9 @@ save('invoices',$_POST);
 
 if(empty($_SESSION['err'])){
     $pdo->exec($sql);
-    header("location:../index.php?do=invoice_list");
+    header("location:../logindex.php?do=invoice_list");
 }else{
-    header("location:../index.php");
+    header("location:../logindex.php");
 }
 
 ?>
