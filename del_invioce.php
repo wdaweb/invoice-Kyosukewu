@@ -174,3 +174,4 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
         <div>
     </div>
 </div>
+</div>

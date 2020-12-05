@@ -22,6 +22,11 @@ include_once("base.php")
     <img class="bg3" src="https://i.postimg.cc/hvkypjbz/bg4.png" alt="">
     <img class="bg4" src="https://i.postimg.cc/x8JpvHHV/bg5.png" alt="">
   </div>
+  <?php
+    if(isset($_SESSION['login'])){
+      echo "<span class='ml-3 text-danger'>歡迎".$_SESSION['login']."大大</span>";
+    }
+    ?>
   <div class="container">
     <div class="book">
       <?php
@@ -50,7 +55,7 @@ include_once("base.php")
         <div class="p1 bg-success mb-1"><a href="?in=<?= $leftPage ?>&do=invoice_list">當期發票</a></div>
         <div class="p2 bg-danger mb-1"><a href="?in=<?= $leftPage ?>&do=award_numbers">全期對獎</a></div>
         <div class="p0 bg-info d-none d-md-flex mb-1"><a href="?in=<?= $leftPage ?>&do=reward_record">中獎紀錄</a></div>
-        <div class="p3 bg-dark mb-1"><a href="index.php">闔上</a></div>
+        <div class="p3 bg-dark mb-1"><a href="?do=logout">登出</a></div>
       </div>
       <div class="path2">
         <div class="p4 bg-primary mb-1"><a href="?in=main&do=<?= $rightPage ?>">輸入發票</a></div>

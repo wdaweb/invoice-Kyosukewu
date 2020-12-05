@@ -46,7 +46,7 @@ if ($nextPeriod > 6) {
 }
 ?>
 <div class="rightPage h-100 d-flex flex-column justify-content-between">
-    <div class="path">
+    <div class="path0">
         <div class="pagination pagination-sm justify-content-center align-items-end mt-lg-2">
             <li class="page-item">
                 <a class="page-link" href="?do=check_invoices&y=<?= $preYear ?>&p=<?= $prePeriod; ?>">
