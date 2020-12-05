@@ -4,9 +4,15 @@ include_once("base.php");
 
 $year = $_GET['y'];
 $period = $_GET['p'];
+$user=$pdo->query("select * from `login` where acc='{$_SESSION['login']}'")->fetch();
+$user_id=$user['id'];
 //資料分頁
 $pageSize = 19; //每頁幾條紀錄
-$rowCount = $pdo->query("select count(period) from `invoices` where period='$period'")->fetch(); //共幾條紀錄
+if($_SESSION['login'] == "admin"){
+    $rowCount = $pdo->query("select COUNT(period) from `invoices` where date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
+}else{
+    $rowCount = $pdo->query("select COUNT(period) from `invoices` where user_id='$user_id' && date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
+}
 $pageNow = 1; //顯示第幾頁
 $pageCount = ceil($rowCount[0] / $pageSize); //共多少頁
 if (!empty($_GET['pageNow'])) {
@@ -145,7 +151,11 @@ $rows = $pdo->query($sql)->fetchall();
 </div>
 <?php
 // include_once("base.php");
-$sql = "select * from invoices where id='{$_GET['id']}'";
+if($_SESSION['login'] == "admin"){
+    $sql = "select * from invoices where id='{$_GET['id']}'";
+}else{
+    $sql = "select * from invoices where user_id='$user_id' && id='{$_GET['id']}'";
+}
 $inv = $pdo->query($sql)->fetch();
 ?>
 <div class="overlay">

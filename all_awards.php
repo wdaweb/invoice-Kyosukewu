@@ -5,6 +5,10 @@ $nyear = $get_new['year'];
 $nperiod = $get_new['period'];
 $year =  !empty($_GET['y']) ? $_GET['y'] : $nyear;
 $period = !empty($_GET['p']) ? $_GET['p'] : $nperiod;
+
+$user=$pdo->query("select * from `login` where acc='{$_SESSION['login']}'")->fetch();
+$user_id=$user['id'];
+
 $awards = $pdo->query("select * from award_numbers where year='$year' && period='$period'")->fetchALL();
 $special = "";
 $grand = "";
@@ -202,7 +206,11 @@ $period_str = [
         <div class="h-100 overflow-auto">開獎結果：
             <?php
             //撈出該期發票
-            $sql = "select * from `invoices` where left(date,4)='{$_GET['y']}' && period='{$_GET['p']}' Order by date";
+            if($_SESSION['login'] == "admin"){
+                $sql = "select * from `invoices` where left(date,4)='{$_GET['y']}' && period='{$_GET['p']}' Order by date";
+            }else{
+                $sql = "select * from `invoices` where user_id='$user_id' && left(date,4)='{$_GET['y']}' && period='{$_GET['p']}' Order by date";
+            }
             $invoices = $pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
             
             //撈出該期獎號

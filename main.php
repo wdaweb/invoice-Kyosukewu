@@ -1,4 +1,10 @@
+<?php
+$user=$pdo->query("select * from `login` where acc='{$_SESSION['login']}'")->fetch();
+$user_id=$user['id'];
+?>
+
 <form class="" action="api/add_invoice.php" method="post">
+<input type="hidden" name="user_id" value="<?=$user_id;?>">
 <table class="mtable col-12 col-md-8 mx-auto">
     <thead>
         <tr>

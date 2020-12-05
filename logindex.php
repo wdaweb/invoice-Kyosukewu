@@ -24,7 +24,7 @@ include_once("base.php")
   </div>
   <?php
     if(isset($_SESSION['login'])){
-      echo "<span class='ml-3 text-danger'>歡迎".$_SESSION['login']."大大</span>";
+      echo "<span class='ml-3 text-danger'>歡迎！".$_SESSION['login']." 大大</span>";
     }
     ?>
   <div class="container">
@@ -59,9 +59,13 @@ include_once("base.php")
       </div>
       <div class="path2">
         <div class="p4 bg-primary mb-1"><a href="?in=main&do=<?= $rightPage ?>">輸入發票</a></div>
-        <div class="p5 bg-warning mb-1"><a href="?in=add_awards&do=<?= $rightPage ?>">輸入獎號</a></div>
+        <?php
+        if($_SESSION['login'] == "admin"){
+          echo "<div class='p5 bg-warning mb-1'><a href='?in=management&do=".$rightPage."'>管理</a></div>";
+        }
+        ?>
         <div class="p0-2 bg-info d-flex d-md-none"><a href="?in=<?= $leftPage ?>&do=reward_record">中獎紀錄</a></div>
-      </div>
+        </div>
       <div class="content">
         <div class="content-l col-12 col-lg-6">
           <div class="card-img-overlay h-100">

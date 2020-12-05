@@ -29,11 +29,7 @@ include_once("base.php")
       include_once "base.php";
       if (isset($_SESSION['login'])) {
         $sql_user = "select `member`.`role`,`login`.`acc` from member,login where `member`.`login_id`=`login`.`id` &&  acc='{$_SESSION['login']}'";
-        echo $sql_user;
-
         $user = $pdo->query($sql_user)->fetch(PDO::FETCH_ASSOC);
-        //exit();
-        // header('location:logindex.php');
       }
       ?>
       <div class="login text-center">
@@ -42,7 +38,7 @@ include_once("base.php")
           <div class="text-light">密碼：<input type="password" name="pw" class="inp"></div>
           <small class="text-center text-danger"><?php if(isset($_GET['meg'])){ echo $_GET['meg'] ;} ?></small>
           <div class="fog my-md-2">
-            <a href="forget_pw.php"><small>忘記密碼?</small></a>
+            <a href="forget.php"><small>忘記密碼?</small></a>
             <a href="register.php" class="ml-2"><small>註冊新帳號</small></a>
           </div>
           <p class="text-center mt-1"><input class="btn btn-outline-light" type="submit" value="登入"><a href="visitor.php" class="btn btn-outline-light ml-3">訪客模式</a></p>

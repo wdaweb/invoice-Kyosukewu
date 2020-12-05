@@ -1,6 +1,9 @@
 <?php
 include_once("base.php");
 //期別查詢
+$user = $pdo->query("select * from `login` where acc='{$_SESSION['login']}'")->fetch();
+$user_id = $user['id'];
+
 $get_new = $pdo->query("select * from `reward_record` order by date desc,period desc limit 1")->fetch(PDO::FETCH_ASSOC);
 
 $nyear = mb_substr($get_new['date'], 0, 4);
@@ -11,7 +14,12 @@ $period = !empty($_GET['p']) ?  $_GET['p'] : $nperiod;
 
 //資料分頁
 $pageSize = 19; //每頁幾條紀錄
-$rowCount = $pdo->query("select COUNT(period) from `reward_record` where date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
+
+if ($_SESSION['login'] == "admin") {
+    $rowCount = $pdo->query("select COUNT(period) from `reward_record` where date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
+} else {
+    $rowCount = $pdo->query("select COUNT(period) from `reward_record` where user_id='$user_id' &&  date LIKE'$year%' && period='$period'")->fetch();
+}
 $pn = 1; //顯示第幾頁
 $pageCount = ceil($rowCount[0] / $pageSize); //共多少頁
 if (!empty($_GET['pn'])) {
@@ -21,19 +29,40 @@ $pageStart = ($pn - 1) * $pageSize; //目前頁面
 
 
 //取得當期資料
-$sql = "select * from `reward_record` where date LIKE'$year%' && period='$period' Order by date desc limit $pageStart,$pageSize";
+if ($_SESSION['login'] == "admin") {
+    $sql = "select * from `reward_record` where date LIKE'$year%' && period='$period' Order by date desc limit $pageStart,$pageSize";
+} else {
+    $sql = "select * from `reward_record` where user_id='$user_id' &&  date LIKE'$year%' && period='$period' Order by date desc limit $pageStart,$pageSize";
+}
+
+
 $rows = $pdo->query($sql)->fetchall(PDO::FETCH_ASSOC);
 
-//取得單期中獎發票總數
-$rea = $pdo->query("select COUNT(id) from `reward_record` where date LIKE'$year%' && period='$period'")->fetch(PDO::FETCH_ASSOC);
-//取得單期中獎總獎金
-$boa = $pdo->query("select SUM(bonus) from `reward_record` where date LIKE'$year%' && period='$period'")->fetch(PDO::FETCH_ASSOC);
-//取得總計獎金
-$bonusCountAll = $pdo->query("select SUM(bonus) as bonusAll from `reward_record` where date LIKE'$year%'")->fetch(PDO::FETCH_ASSOC);
-//取得總計發票數量
-$invoiceAll = $pdo->query("SELECT COUNT(id) FROM `invoices` WHERE date LIKE'$year%'")->fetch(PDO::FETCH_ASSOC);
-//取得總消費金額
-$pay=$pdo->query("select SUM(payment) as paymentAll from `reward_record` where date LIKE'$year%'")->fetchColumn();
+if ($_SESSION['login'] == "admin") {
+    //取得單期中獎發票總數
+    $rea = $pdo->query("select COUNT(id) from `reward_record` where date LIKE'$year%' && period='$period'")->fetch(PDO::FETCH_ASSOC);
+    //取得單期中獎總獎金
+    $boa = $pdo->query("select SUM(bonus) from `reward_record` where date LIKE'$year%' && period='$period'")->fetch(PDO::FETCH_ASSOC);
+    //取得總計獎金
+    $bonusCountAll = $pdo->query("select SUM(bonus) as bonusAll from `reward_record` where date LIKE'$year%'")->fetch(PDO::FETCH_ASSOC);
+    //取得總計發票數量
+    $invoiceAll = $pdo->query("SELECT COUNT(id) FROM `invoices` WHERE date LIKE'$year%'")->fetch(PDO::FETCH_ASSOC);
+    //取得總消費金額
+    $pay = $pdo->query("select SUM(payment) as paymentAll from `reward_record` where date LIKE'$year%'")->fetchColumn();
+    $invoices = $pdo->query("select * from `invoices` where left(date,4)='{$year}' && period='{$period}' Order by date")->fetchALL(PDO::FETCH_ASSOC);
+} else {
+    //取得單期中獎發票總數
+    $rea = $pdo->query("select COUNT(id) from `reward_record` where user_id='$user_id' &&  date LIKE'$year%' && period='$period'")->fetch(PDO::FETCH_ASSOC);
+    //取得單期中獎總獎金
+    $boa = $pdo->query("select SUM(bonus) from `reward_record` where user_id='$user_id' &&  date LIKE'$year%' && period='$period'")->fetch(PDO::FETCH_ASSOC);
+    //取得總計獎金
+    $bonusCountAll = $pdo->query("select SUM(bonus) as bonusAll from `reward_record` where user_id='$user_id' &&  date LIKE'$year%'")->fetch(PDO::FETCH_ASSOC);
+    //取得總計發票數量
+    $invoiceAll = $pdo->query("SELECT COUNT(id) FROM `invoices` WHERE user_id='$user_id' &&  date LIKE'$year%'")->fetch(PDO::FETCH_ASSOC);
+    //取得總消費金額
+    $pay = $pdo->query("select SUM(payment) as paymentAll from `reward_record` where user_id='$user_id' &&  date LIKE'$year%'")->fetchColumn();
+    $invoices = $pdo->query("select * from `invoices` where user_id='$user_id' &&  left(date,4)='{$year}' && period='{$period}' Order by date")->fetchALL(PDO::FETCH_ASSOC);
+}
 
 
 
@@ -41,7 +70,6 @@ $bc = $boa['SUM(bonus)']; //單期中獎獎金
 $rca = $rea['COUNT(id)']; //單期中獎發票總數
 $bca = $bonusCountAll['bonusAll']; //年度總計獎金
 $inva = $invoiceAll['COUNT(id)']; //年度總計發票數;
-$invoices = $pdo->query("select * from `invoices` where left(date,4)='{$year}' && period='{$period}' Order by date")->fetchALL(PDO::FETCH_ASSOC);
 $periodCount = count($invoices); //單期發發票總數
 
 

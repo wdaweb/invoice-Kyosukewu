@@ -6,9 +6,15 @@ $nyear = $get_new['year'];
 $nperiod = $get_new['period'];
 $year =  !empty($_GET['y']) ? $_GET['y'] : $nyear;
 $period = !empty($_GET['p']) ? $_GET['p'] : $nperiod;
+$user=$pdo->query("select * from `login` where acc='{$_SESSION['login']}'")->fetch();
+$user_id=$user['id'];
 //資料分頁
 $pageSize = 19; //每頁幾條紀錄
-$rowCount = $pdo->query("select count(period) from `invoices` where period='$period'")->fetch(); //共幾條紀錄
+if($_SESSION['login'] == "admin"){
+    $rowCount = $pdo->query("select COUNT(period) from `invoices` where date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
+}else{
+    $rowCount = $pdo->query("select COUNT(period) from `invoices` where user_id='$user_id' && date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
+}
 $pageNow = 1; //顯示第幾頁
 $pageCount = ceil($rowCount[0] / $pageSize); //共多少頁
 if (!empty($_GET['pageNow'])) {

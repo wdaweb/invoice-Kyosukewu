@@ -4,9 +4,15 @@ include_once("base.php");
 
 $year =  $_GET['y'];
 $period = $_GET['p'];
+$user = $pdo->query("select * from `login` where acc='{$_SESSION['login']}'")->fetch();
+$user_id = $user['id'];
 //資料分頁
 $pageSize = 19; //每頁幾條紀錄
-$rowCount = $pdo->query("select count(period) from `invoices` where period='$period'")->fetch(); //共幾條紀錄
+if ($_SESSION['login'] == "admin") {
+    $rowCount = $pdo->query("select COUNT(period) from `invoices` where date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
+} else {
+    $rowCount = $pdo->query("select COUNT(period) from `invoices` where user_id='$user_id' && date LIKE'$year%' && period='$period'")->fetch(); //共幾條紀錄
+}
 $pageNow = 1; //顯示第幾頁
 $pageCount = ceil($rowCount[0] / $pageSize); //共多少頁
 if (!empty($_GET['pageNow'])) {
@@ -28,16 +34,16 @@ $rows = $pdo->query($sql)->fetchall();
             <li class="page-item">
                 <form class="d-flex" action="logindex.php" method="get">
                     <select name="y" class="form-select form-select-sm text-dark">
-                        <option value="<?= $year-1 ?>"><?= $year-1 ?></option>
+                        <option value="<?= $year - 1 ?>"><?= $year - 1 ?></option>
                         <option value="<?= $year ?>" selected><?= $year ?></option>
-                        <option value="<?= $year+1 ?>"><?= $year+1 ?></option>
+                        <option value="<?= $year + 1 ?>"><?= $year + 1 ?></option>
                     </select>
                     <select name="p" class="form-select form-select-sm text-dark">
                         <?php
                         for ($i = 1; $i < 7; $i++) {
-                            if($i==$period){
+                            if ($i == $period) {
                                 echo "<option value='$i' selected>";
-                            }else{
+                            } else {
                                 echo "<option value='$i'>";
                             }
                             echo "$month[$i]" . "</option>";
@@ -150,7 +156,7 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
 <div class="overlay">
     <div class="title bg-danger">
         <p class="text-white">刪除發票</p>
-        <a href="?do=invoice_list&y=<?=$year;?>&p=<?=$period;?>"><i class="fas fa-times"></i></a>
+        <a href="?do=invoice_list&y=<?= $year; ?>&p=<?= $period; ?>"><i class="fas fa-times"></i></a>
     </div>
     <div class="edit text-center">
         <p>確定要刪除以下發票？</p>
@@ -164,14 +170,15 @@ $inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
             </div>
         </div>
         <div class="text-center">
-            <a href="?do=del_invoice_check&del=1&id=<?= $_GET['id']; ?>&y=<?=$year;?>&p=<?=$period;?>">
+            <a href="?do=del_invoice_check&del=1&id=<?= $_GET['id']; ?>&y=<?= $year; ?>&p=<?= $period; ?>">
                 <!-- do=del用來區分是要帶值來刪除頁or刪除資料 -->
                 <button class="btn-danger">確認</button>
             </a>
-            <a href="?do=invoice_list&y=<?=$year;?>&p=<?=$period;?>">
+            <a href="?do=invoice_list&y=<?= $year; ?>&p=<?= $period; ?>">
                 <button class="btn-warning">取消</button>
             </a>
-        <div>
+            <div>
+            </div>
+        </div>
     </div>
-</div>
 </div>
