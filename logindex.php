@@ -23,9 +23,9 @@ include_once("base.php")
     <img class="bg4" src="https://i.postimg.cc/x8JpvHHV/bg5.png" alt="">
   </div>
   <?php
-    if(isset($_SESSION['login'])){
-      echo "<span class='ml-3 text-danger'>歡迎！".$_SESSION['login']." 大大</span>";
-    }
+    // if(isset($_SESSION['login'])){
+    //   echo "<span class='ml-3 text-danger'>歡迎！".$_SESSION['login']." 大大</span>";
+    // }
     ?>
   <div class="container">
     <div class="book">

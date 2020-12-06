@@ -26,13 +26,13 @@ accept('payment','發票金額的欄位必填');
 
 // $sql="insert into invoices (`".implode("`,`",array_keys($_POST))."`) values('".implode("','",$_POST)."')";
 
-save('invoices',$_POST);
 
 
 // echo "新增完成";
 
 if(empty($_SESSION['err'])){
-    $pdo->exec($sql);
+    save('invoices',$_POST);
+    // $pdo->exec($sql);
     header("location:../logindex.php?do=invoice_list");
 }else{
     header("location:../logindex.php");
