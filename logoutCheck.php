@@ -1,4 +1,6 @@
 <?php
-    setcookie("login",'',-100);
+    session_start();
+    session_destroy();
+    // setcookie("login",'',-100);
     header("location:index.php");
     ?>
