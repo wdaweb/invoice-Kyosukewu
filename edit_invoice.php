@@ -1,11 +1,9 @@
 <?php
 include_once("base.php");
 //期別查詢
-$get_new = $pdo->query("select * from `award_numbers` order by year desc,period desc limit 1")->fetch();
-$nyear = $get_new['year'];
-$nperiod = $get_new['period'];
-$year =  !empty($_GET['y']) ? $_GET['y'] : $nyear;
-$period = !empty($_GET['p']) ? $_GET['p'] : $nperiod;
+
+$year = $_GET['y'];
+$period = $_GET['p'];
 $user=$pdo->query("select * from `login` where acc='{$_SESSION['login']}'")->fetch();
 $user_id=$user['id'];
 //資料分頁
@@ -26,7 +24,7 @@ $rows = $pdo->query($sql)->fetchall();
 
 ?>
 <div class="rightPage h-100 d-flex flex-column justify-content-between">
-    <div class="path">
+<div class="path">
         <div class="pagination pagination-sm justify-content-center align-items-end mt-lg-2">
             <li class="page-item">
                 <a class="page-link" href="#">
@@ -34,18 +32,18 @@ $rows = $pdo->query($sql)->fetchall();
                 </a>
             </li>
             <li class="page-item">
-                <form class="d-flex" action="loglogindex.php" method="get">
+                <form class="d-flex" action="logindex.php" method="get">
                     <select name="y" class="form-select form-select-sm text-dark">
-                        <option value="<?= $year - 1 ?>"><?= $year - 1 ?></option>
+                        <option value="<?= $year-1 ?>"><?= $year-1 ?></option>
                         <option value="<?= $year ?>" selected><?= $year ?></option>
-                        <option value="<?= $year + 1 ?>"><?= $year + 1 ?></option>
+                        <option value="<?= $year+1 ?>"><?= $year+1 ?></option>
                     </select>
                     <select name="p" class="form-select form-select-sm text-dark">
                         <?php
                         for ($i = 1; $i < 7; $i++) {
-                            if ($i == $period) {
+                            if($i==$period){
                                 echo "<option value='$i' selected>";
-                            } else {
+                            }else{
                                 echo "<option value='$i'>";
                             }
                             echo "$month[$i]" . "</option>";
@@ -123,8 +121,8 @@ $rows = $pdo->query($sql)->fetchall();
             </a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="#">
-                <span aria-hidden=" true" class="text-dark fas fas fa-angle-left"></span>
+            <a class="page-link" href="#"">
+                <span aria-hidden="true" class="text-dark fas fas fa-angle-left"></span>
             </a>
         </li>
         <li class="page-item">
@@ -151,124 +149,39 @@ $rows = $pdo->query($sql)->fetchall();
         </li>
     </div>
 </div>
-
 <?php
-$inv = $pdo->query("select * from invoices where id='{$_GET['id']}'")->fetch();
+// include_once("base.php");
+if($_SESSION['login'] == "admin"){
+    $sql = "select * from invoices where id='{$_GET['id']}'";
+}else{
+    $sql = "select * from invoices where user_id='$user_id' && id='{$_GET['id']}'";
+}
+$inv = $pdo->query($sql)->fetch();
 ?>
 <div class="overlay">
-    <div class="title bg-success">
-        <p class="text-white">發票對獎</p>
-        <a href="?do=invoice_list&y=<?= $year; ?>&p=<?= $period; ?>"><i class="fas fa-times"></i></a>
+    <div class="title bg-warning">
+        <p class="text-white">編輯發票</p>
+        <a href="?do=invoice_list&y=<?=$year;?>&p=<?=$period;?>"><i class="fas fa-times"></i></a>
     </div>
-    <div class="edit text-center">
+    <form class="edit" action="api/update_invoice.php" method="post">
         <div class="mainedit mb-2">
-            <div class="w-100">
-                <ul class="list-group">
-                    <li class="list-group-item">發票號碼：<?= $inv['code'] . $inv['number']; ?></li>
-                    <!-- <li class="list-group-item"><?= $inv['date']; ?></li>
-                    <li class="list-group-item"><?= $inv['payment']; ?></li> -->
-                </ul>
+            <input type="hidden" name="id" value="<?= $inv['id']; ?>">
+            <input type="hidden" name="y" value="<?= $year; ?>">
+            <input type="hidden" name="p" value="<?= $period; ?>">
+            <div class="text col-12">
+                <p class="pb-3" >發票號碼：</p>
+                <p class="pb-3" >消費日期：</p>
+                <p class="pb-3" >消費金額：</p>
+            </div>
+            <div class="work">
+                <input class="i1 mb-2" type="text" name="code" value="<?= $inv['code']; ?>">-<input class="i2" type="number" name="number" value="<?= $inv['number']; ?>">
+                <input class="i3 mb-2" type="date" name="date" value="<?= $inv['date']; ?>">
+                <input class="i3 mb-2" type="number" name="payment" value="<?= $inv['payment']; ?>">
             </div>
         </div>
-        <div>開獎結果：
-            <?php
-            // include_once("base.php");
-            $inv_id = $_GET['id'];
-            $invoice = $pdo->query("select * from invoices where id='$inv_id'")->fetch();
-            // echo "<pre>";
-            // print_r($invoice);
-            // echo "</pre>";
-            $number = $invoice['number'];
-            //找出獎號
-            //**
-            //確認期數->依照目前的發票日期做分析
-            //得到期數資料後->撈出該期的開獎獎號
-            $date = $invoice['date'];
-            //explode('-',$date)取日期資料的陣列,陣列的第二個元素即月
-            //月份期可推算期數，有期數及年份即可找到開獎號碼
-            $year = explode('-', $date)[0];
-            $period = ceil(explode('-', $date)[1] / 2);
-            $awards = $pdo->query("select * from award_numbers where year='$year' && period='$period'")->fetchALL();
-
-            $all_res = -1;
-            $aw="";
-            $abonus=[
-                "特別獎"=>10000000,
-                "特獎"=>2000000,
-                "頭獎"=>200000,
-                "貳獎"=>40000,
-                "參獎"=>10000,
-                "肆獎"=>4000,
-                "伍獎"=>1000,
-                "陸獎"=>200,
-            ];
-            foreach ($awards as $award) {
-                switch ($award['type']) {
-                    case 1: //特別號
-                        if ($award['number'] == $number) {
-                            echo "<div class='h3 text-danger'>中大獎啦！<br>特別獎-獎金壹千萬！！</div>";
-                            $all_res = 1;
-                            $aw="特別獎";
-                            $bonus=$abonus[$aw];
-                        }
-                        break;
-                    case 2: //特獎
-                        if ($award['number'] == $number) {
-                            echo "<div class='h3 text-danger'>中大獎啦！<br>特獎-獎金貳佰萬！！</div>";
-                            $all_res = 1;
-                            $aw="特獎";
-                            $bonus=$abonus[$aw];
-                        }
-                        break;
-                    case 3: //頭獎
-                        $res = -1;
-                        for ($i = 5; $i >= 0; $i--) { //從尾數開始對
-                            $target = mb_substr($award['number'], $i, (8 - $i), 'utf8');
-                            $mynumber = mb_substr($number, $i, (8 - $i), 'utf8');
-
-                            if ($target == $mynumber) {
-                                //已中獎等待獎項最終判定
-                                $res = $i;
-                            } else {
-                                break; //continue;
-                            }
-                        }
-                        if ($res != -1) { //判斷最終的獎項
-                            echo "<div class='h3 text-danger'>中獎啦！<br>中了{$awardStr[$res]}獎啦~";
-                            $all_res = 1;
-                            $aw="{$awardStr[$res]}獎";
-                            $bonus=$abonus[$aw];
-                        }
-                        break;
-                    case 4: //增開六獎
-                        if ($award['number'] == mb_substr($number, 5, 3, 'utf8')) {
-                            echo "<div class='h3 text-danger'>中獎啦！<br>增開陸獎-獎金貳佰元</div>";
-                            $all_res = 1;
-                            $aw="陸獎";
-                            $bonus=$abonus[$aw];
-                        }
-                        break;
-                }
-            }
-            if ($all_res == -1) {
-                echo "<div class='h5 text-dark'>可惜不是你~ 再接再厲吧</div>";
-            }
-
-            // insert into invoices (`date`,`period`,`code`,`number`,`payment`) values('2020-12-02','1','SG','0267817448','40')
-
-            $check=$pdo->query("select * from `reward_record` where id='$inv_id'")->fetch();
-            //資料寫入
-            if($all_res>=0 && empty($check)){
-                    $sql="insert into `reward_record` (`inid`,`user_id`,`code`,`number`,`period`,`payment`,`date`,`reward`,`bonus`) values ('{$invoice['id']}','{$invoice['user_id']}','{$invoice['code']}','{$invoice['number']}','{$invoice['period']}','{$invoice['payment']}','{$invoice['date']}','$aw','$bonus')";
-                    $pdo->exec($sql);
-                }
-
-            ?>
-        </div>
-        <div class="text-center mt-2">
-            <a href="?do=invoice_list&y=<?= $year; ?>&p=<?= $period; ?>">
-                <button class="btn-success">確認</button>
-            </a>
-            <div>
-            </div>
-        </div>
+        <div class="text-center">
+            <input class="btn btn-outline-warning" type="submit" value="修改">
+            <input class="btn btn-outline-dark" type="reset" value="重填">
+        <div>
+    </form>
+</div>
